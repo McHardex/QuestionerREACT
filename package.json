@@ -4,9 +4,11 @@
   "description": "Crowd-source questions for a meetup. Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
     "test": "jest",
     "test:coverage": "npm test -- --coverage",
-    "start": "webpack-dev-server --open"
+    "coveralls": "jest --coverage && cat coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
+    "coveralls": "^3.0.3",
     "css-loader": "^2.1.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
@@ -41,6 +44,8 @@
     "webpack-dev-server": "^3.2.1"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>src/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.js"
+    ]
   }
 }
