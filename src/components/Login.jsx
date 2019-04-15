@@ -23,23 +23,23 @@ const Login = () => (
           <button type="submit" className="sign-in">Sign in</button>
         </form>
         <div className="more-details">
-          <a href="jjjj">Forgot password?</a>
+          <Link to="/">Forgot password?</Link>
           <div className="or">
             <hr className="bar" />
             <span>OR</span>
             <hr className="bar" />
           </div>
-          <a href="./signup.html" className="sign-up">Create an account</a>
+          <Link to="/signup" className="sign-up">Create an account</Link>
         </div>
       </div>
     </div>
     <div className="col2">
       <h1>
-Let's create the future
+        Lets create the future
         {' '}
         <strong>together</strong>
-            </h1>
-      <a href="./signup.html" className="getstarted">Get started today</a>
+      </h1>
+      <Link to="/signup" className="getstarted">Get started today</Link>
     </div>
     <div className="error-cont" id="error-div">
       <p id="error" />
