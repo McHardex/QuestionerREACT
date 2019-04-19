@@ -1,125 +1,205 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import loader from '../assets/images/loader.gif';
-import logo from '../assets/images/logo.png';
+import propTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
+import { signUpUser } from '../actions/authActions';
 import '../assets/stylesheets/signup.css';
+import Label from './Label.jsx';
+import Header from './Header.jsx';
+import Loader from './Loader';
 
-const Signup = () => (
-  <div>
-    <header className="signup">
-      <div className="questioner-logo">
-        <Link to="/">
-          <img src={logo} alt="questioner-logo" className="logo" />
-        </Link>
-        <span>QUESTIONER</span>
-      </div>
-    </header>
-    <div className="wrapper">
-      <h1>Easy to use. Create an account.</h1>
-      <div className="have-acc">
-        <p>
-          Already have an account?
-          {' '}
-          <Link to="login" className="sign-in-link">
-            Sign in
-          </Link>
-        </p>
-        <hr />
-      </div>
-      <form className="signup-form" id="signup-form">
-        <div className="form-wrapper">
-          <div className="form1">
-            <label>
-              First Name
-              <sup>*</sup>
-            </label>
-            <input
-              type="text"
-              className="form-input"
-              name="firstname"
-              required
-            />
-            <label>
-              Last Name
-              <sup>*</sup>
-            </label>
-            <input
-              type="text"
-              className="form-input"
-              name="lastname"
-              required
-            />
-            <label>
-              Other Name
-              <sup>*</sup>
-            </label>
-            <input
-              type="text"
-              className="form-input"
-              name="othername"
-              required
-            />
-            <label>
-              Username
-              <sup>*</sup>
-            </label>
-            <input
-              type="text"
-              className="form-input"
-              name="username"
-              required
-            />
+class Signup extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signUpSuccess: false,
+      error: false,
+      isLoading: false,
+    };
+  }
+
+  resetForm = (target) => {
+    target.reset();
+    this.setState({ isLoading: false });
+  }
+
+  signUpUser = (e) => {
+    e.preventDefault();
+    const data = {};
+    const { target } = e;
+    const formData = new FormData(target);
+
+    for (const entry of formData.entries()) {
+      const [keys, values] = entry;
+      data[keys] = values;
+    }
+    // eslint-disable-next-line no-shadow
+    const { signUpUser } = this.props;
+    signUpUser(data, () => this.resetForm(target));
+
+    // change Loading state
+    this.setState({ isLoading: true });
+  }
+
+  clearError = () => {
+    this.setState({
+      error: false,
+    });
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      signUpSuccess: nextProps.auth.signUpSuccess,
+      error: nextProps.auth.error,
+      isLoading: nextProps.auth.isLoading,
+    });
+  }
+
+  render() {
+    const { auth } = this.props;
+    const { error, signUpSuccess, isLoading } = this.state;
+    if (error) {
+      setTimeout(() => {
+        this.setState({
+          error: false,
+        });
+      }, 20000);
+    }
+    return (
+      <div>
+        <Header />
+        <div className="wrapper">
+          <h1>Easy to use. Create an account.</h1>
+          <div className="have-acc">
+            <p>
+              Already have an account?
+              {' '}
+              <Link to="login" className="sign-in-link">
+                Sign in
+              </Link>
+            </p>
+            <hr />
           </div>
-          <div className="form2">
-            <label>
-              Email
+          <form className="signup-form" id="signup-form" onSubmit={this.signUpUser}>
+            <div className="form-wrapper">
+              <div className="form1">
+                <Label htmlFor="firstname">
+                  First Name
+                  <sup>*</sup>
+                </Label>
+                <input
+                  id="firstname"
+                  type="text"
+                  className="form-input"
+                  name="firstname"
+                  required
+                />
+                <Label htmlFor="lastname">
+                  Last Name
+                  <sup>*</sup>
+                </Label>
+                <input
+                  type="text"
+                  className="form-input"
+                  name="lastname"
+                  required
+                />
+                <Label htmlFor="othername">
+                  Other Name
+                  <sup>*</sup>
+                </Label>
+                <input
+                  type="text"
+                  className="form-input"
+                  name="othername"
+                  required
+                />
+                <Label htmlFor="username">
+                  Username
+                  <sup>*</sup>
+                </Label>
+                <input
+                  type="text"
+                  className="form-input"
+                  name="username"
+                  required
+                />
+              </div>
+              <div className="form2">
+                <Label htmlFor="email">
+                  Email
+                  <sup>*</sup>
+                </Label>
+                <input type="email" className="form-input" name="email" required />
+                <Label htmlFor="phonenumber">
+                  Phone Number
+                  <sup>*</sup>
+                </Label>
+                <input
+                  type="number"
+                  className="form-input"
+                  name="phoneNumber"
+                  required
+                />
+                <label htmlFor="password">
+                  Password
+                  <sup>*</sup>
+                </label>
+                <input
+                  type="password"
+                  className="form-input"
+                  name="password"
+                  required
+                />
+              </div>
+            </div>
+            <p className="required">
               <sup>*</sup>
-            </label>
-            <input type="email" className="form-input" name="email" required />
-            <label>
-              Phone Number
-              <sup>*</sup>
-            </label>
-            <input
-              type="number"
-              className="form-input"
-              name="phoneNumber"
-              required
-            />
-            <label htmlFor="password">
-              Password
-              <sup>*</sup>
-            </label>
-            <input
-              type="password"
-              className="form-input"
-              name="password"
-              required
-            />
-          </div>
+              Required
+            </p>
+            <CSSTransition
+              in={signUpSuccess}
+              timeout={5000}
+              classNames="alert"
+              unmountOnExit
+            >
+              <p id="success">
+                  Account Successfully Created
+                {' '}
+                <Link to="login"> Log in</Link>
+              </p>
+            </CSSTransition>
+            <button type="submit" className="submit-form" id="submit-form">
+              Sign up
+            </button>
+          </form>
         </div>
-        <p className="required">
-          <sup>*</sup>
-          Required
-        </p>
-        <p id="success">
-          Account Successfully Created
-          {' '}
-          <Link to="login"> Log in</Link>
-        </p>
-        <button type="submit" className="submit-form" id="submit-form">
-          Sign up
-        </button>
-      </form>
-    </div>
-    <div className="error-cont" id="error-div">
-      <p id="error" />
-      <span id="exit-error">X</span>
-    </div>
-    <div id="loader">{loader}</div>
-  </div>
-);
+        <CSSTransition
+          in={error}
+          timeout={5000}
+          classNames="alert"
+          unmountOnExit
+          onExited={() => this.clearError}
+        >
+          <div className="error-cont" id="error-div">
+            <p id="error">{auth.signUpError}</p>
+            <span id="exit-error" role="presentation" onClick={this.clearError} onKeyDown={this.clearError}>X</span>
+          </div>
+        </CSSTransition>
+        {
+          isLoading && <Loader />
+        }
+      </div>
+    );
+  }
+}
 
-export default Signup;
+Signup.propTypes = {
+  signUpUser: propTypes.func.isRequired,
+};
+
+const mapStateToProps = auth => auth;
+export default connect(mapStateToProps, { signUpUser })(Signup);

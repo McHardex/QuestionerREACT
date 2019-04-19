@@ -1,0 +1,19 @@
+#loader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  justify-content: center;
+  border-radius: 100px;
+  text-align: center;
+}
+
+#loader img {
+  height: 60px;
+  background: #363636;
+  border-radius: 50px;
+}
