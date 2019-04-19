@@ -1,23 +1,25 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LandingPage from './LandingPage.jsx';
-import Signup from './Signup.jsx';
-import Login from './Login.jsx';
+import { Provider } from 'react-redux';
+import store from '../lib/store';
+import LandingPage from './LandingPage';
+import Signup from './Signup';
+import Login from './Login';
 
 const App = () => (
   <div>
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          {/* <ProtectedRoute path="/createride" component={CreateRide} /> */}
-          {/* <ProtectedRoute path="/allrides/:rideid" component={OneRide} /> */}
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   </div>
 );
 
