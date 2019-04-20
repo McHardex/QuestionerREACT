@@ -5,6 +5,8 @@ const initialState = {
   signUpSuccess: false,
   error: false,
   signUpError: null,
+  loginError: null,
+  loginSuccess: false,
   isLoading: false,
 };
 
@@ -17,6 +19,14 @@ const auth = (state = initialState, action) => {
     case actionType.SIGNUP_ERROR:
       return {
         ...state, signUpError: action.error, error: true, signUpSuccess: false, isLoading: false,
+      };
+    case actionType.LOGIN_SUCCESS:
+      return {
+        ...state, user: action.user, error: false, loginSuccess: true,
+      };
+    case actionType.LOGIN_ERROR:
+      return {
+        ...state, loginError: action.error, error: true, loginSuccess: false, isLoading: false,
       };
     default:
       return state;

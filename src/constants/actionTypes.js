@@ -1,6 +1,8 @@
 const actionType = {
   SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
   SIGNUP_ERROR: 'SIGNUP_ERROR',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_ERROR: 'LOGIN_ERROR',
 };
 
 export default actionType;

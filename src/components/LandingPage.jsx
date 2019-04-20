@@ -1,10 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
+import logo from '../assets/images/logo.png';
+import '../assets/stylesheets/landingPage.css';
 
 const LandingPage = () => (
   <div className="landing-pg">
-    <Header />
+    <header>
+      <div className="header-cont">
+        <div className="nav1">
+          <div className="questioner-logo">
+            <img src={logo} alt="questioner-logo" />
+            <span>QUESTIONER</span>
+          </div>
+        </div>
+        <div className="nav2">
+          <div className="header-utilities">
+            <Link to="/signup" className="get-started">Get Started</Link>
+            <Link to="/login" className="login">Log in</Link>
+          </div>
+        </div>
+      </div>
+    </header>
     <div className="lp-bk-img">
       <div className="welcom-note">
         <h1>
