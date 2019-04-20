@@ -2,12 +2,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { signUpUser } from '../actions/authActions';
 import '../assets/stylesheets/signup.css';
 import Label from './Label.jsx';
-import Header from './Header.jsx';
+import logo from '../assets/images/logo.png';
 import Loader from './Loader';
 
 class Signup extends Component {
@@ -70,7 +69,22 @@ class Signup extends Component {
     }
     return (
       <div>
-        <Header />
+        <header>
+          <div className="header-cont">
+            <div className="nav1">
+              <div className="questioner-logo">
+                <img src={logo} alt="questioner-logo" />
+                <span>QUESTIONER</span>
+              </div>
+            </div>
+            <div className="nav2">
+              <div className="header-utilities">
+                <Link to="/signup" className="get-started">Get Started</Link>
+                <Link to="/login" className="login">Log in</Link>
+              </div>
+            </div>
+          </div>
+        </header>
         <div className="wrapper">
           <h1>Easy to use. Create an account.</h1>
           <div className="have-acc">
@@ -196,10 +210,6 @@ class Signup extends Component {
     );
   }
 }
-
-Signup.propTypes = {
-  signUpUser: propTypes.func.isRequired,
-};
 
 const mapStateToProps = auth => auth;
 export default connect(mapStateToProps, { signUpUser })(Signup);

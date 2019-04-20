@@ -13,6 +13,16 @@ export const signUpError = error => ({
   error,
 });
 
+export const loginSuccess = user => ({
+  type: actionTypes.LOGIN_SUCCESS,
+  user,
+});
+
+export const loginError = error => ({
+  type: actionTypes.LOGIN_ERROR,
+  error,
+});
+
 export const signUpUser = (data, succesCallBack) => dispatch => axios.post(`${baseUrl}/signup`, data)
   .then((res) => {
     dispatch(signUpSuccess(res));
@@ -20,4 +30,15 @@ export const signUpUser = (data, succesCallBack) => dispatch => axios.post(`${ba
   })
   .catch((res) => {
     dispatch(signUpError(res.response.data.error));
+  });
+export const loginUser = (data, succesCallBack) => dispatch => axios.post(`${baseUrl}/login`, data)
+  .then((res) => {
+    const { token, user } = res.data.data[0];
+    dispatch(loginSuccess(user));
+    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('userDetails', JSON.stringify(user));
+    succesCallBack();
+  })
+  .catch((res) => {
+    dispatch(loginError(res.response.data.error));
   });
