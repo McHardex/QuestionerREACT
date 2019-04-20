@@ -35,6 +35,7 @@
             "depth": 3
         }],
         "import/extensions": [2, "never", "always", "ignorePackages"],
-        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"]
+        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+        "no-shadow": [0]
     }
 }

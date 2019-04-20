@@ -1,7 +1,5 @@
-import axios from 'axios';
 import actionTypes from '../constants/actionTypes';
-
-const baseUrl = 'https://questioner-mchardex.herokuapp.com/api/v1/auth';
+import http from '../lib/http';
 
 export const signUpSuccess = user => ({
   type: actionTypes.SIGNUP_SUCCESS,
@@ -23,7 +21,7 @@ export const loginError = error => ({
   error,
 });
 
-export const signUpUser = (data, succesCallBack) => dispatch => axios.post(`${baseUrl}/signup`, data)
+export const signUpUser = (data, succesCallBack) => dispatch => http.post('/auth/signup', data)
   .then((res) => {
     dispatch(signUpSuccess(res));
     succesCallBack();
@@ -31,7 +29,7 @@ export const signUpUser = (data, succesCallBack) => dispatch => axios.post(`${ba
   .catch((res) => {
     dispatch(signUpError(res.response.data.error));
   });
-export const loginUser = (data, succesCallBack) => dispatch => axios.post(`${baseUrl}/login`, data)
+export const loginUser = (data, succesCallBack) => dispatch => http.post('/auth/login', data)
   .then((res) => {
     const { token, user } = res.data.data[0];
     dispatch(loginSuccess(user));
