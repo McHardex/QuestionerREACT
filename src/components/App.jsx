@@ -8,6 +8,8 @@ import Signup from './Signup';
 import Login from './Login';
 import Admin from './Admin';
 import Meetup from './Meetup';
+import MeetupDetails from './MeetupDetails';
+import Profile from './Profile';
 
 const App = () => (
   <div>
@@ -20,6 +22,8 @@ const App = () => (
             <Route exact path="/login" component={Login} />
             <Route exact path="/meetups" component={Meetup} />
             <Route exact path="/admin" component={Admin} />
+            <Route exact path="/meetups/:id" component={MeetupDetails} />
+            <Route exact path="/profile" component={Profile} />
           </Switch>
         </div>
       </Router>
