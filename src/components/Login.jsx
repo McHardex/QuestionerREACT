@@ -17,6 +17,7 @@ class Login extends Component {
     this.state = {
       error: false,
       isLoading: false,
+      redirect: false,
     };
   }
 
@@ -58,6 +59,11 @@ class Login extends Component {
     });
   }
 
+  componentWillUnmount = () => {
+    this.state.error = false;
+    this.state.isLoading = false;
+  }
+
   render() {
     const { auth } = this.props;
     const {
@@ -73,10 +79,10 @@ class Login extends Component {
             </div>
             <form className="login-form" id="login-form" onSubmit={this.login}>
               <label htmlFor="email">Email</label>
-              <input type="email" className="login-input" name="email" required />
+              <input type="email" className="login-input" name="email" autoComplete="email" required />
               <br />
               <label htmlFor="password">Password</label>
-              <input type="password" className="login-input" name="password" required />
+              <input type="password" className="login-input" name="password" autoComplete="current-password" required />
               <br />
               <button type="submit" className="sign-in">Sign in</button>
             </form>

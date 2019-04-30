@@ -124,6 +124,7 @@ a.sign-up {
   padding: 5px 0;
   text-decoration: none;
   border-radius: 2px;
+  margin-top: 20px;
 }
 
 a.sign-up:hover, .getstarted:hover {

@@ -34,7 +34,6 @@ export const loginUser = (data, succesCallBack) => dispatch => http.post('/auth/
     const { token, user } = res.data.data[0];
     dispatch(loginSuccess(user));
     localStorage.setItem('token', JSON.stringify(token));
-    localStorage.setItem('userDetails', JSON.stringify(user));
     succesCallBack();
   })
   .catch((res) => {

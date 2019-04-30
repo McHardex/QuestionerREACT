@@ -12,7 +12,7 @@ const Header = (props) => {
     return (
       <header>
         <div className="questioner-logo">
-          <a href="./meetups.html"><img src={logo} alt="questioner-logo" /></a>
+          <Link to="/meetups"><img src={logo} alt="questioner-logo" /></Link>
           <span>QUESTIONER</span>
         </div>
         <div className="user">
@@ -31,12 +31,12 @@ const Header = (props) => {
   return (
     <header>
       <div className="questioner-logo">
-        <a href="./meetups.html"><img src={logo} alt="questioner-logo" /></a>
+        <Link to="/meetups"><img src={logo} alt="questioner-logo" /></Link>
         <span>QUESTIONER</span>
       </div>
       <div className="user">
         <i className="fas fa-user-cog" />
-        <span id="user" />
+        <span id="user">{username}</span>
         <div className="dropdown-content">
           <Link to="/profile">Profile </Link>
           <Link to="/meetups">Meetup </Link>
@@ -47,13 +47,13 @@ const Header = (props) => {
   );
 };
 
+
 Header.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   role: propTypes.bool,
-  username: propTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  username: propTypes.string,
 };
 
-Header.defaultProps = {
-  role: propTypes.bool,
-};
 
 export default Header;

@@ -30,9 +30,15 @@ form.search-bar {
   padding: 20px;
 }
 
+.search-cont {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
 .search-meetup {
   background-size: 26px 26px;
-  width: 100%;
+  width: 85%;
   background-repeat: no-repeat;
   background-position: 5px 6px;
   border: solid 1px #5550;
@@ -54,19 +60,12 @@ form.search-bar {
 }
 
 .search-meetup:hover {
-  /* border: solid 1px #555; */
   font-size: 24px;
   padding: 10px 40px;
 }
 
 ::placeholder {
   font-weight: 100;
-}
-
-hr {
-  border: none;
-  height: 1px;
-  background: #cccccc63;
 }
 
 .meetup-cont {
@@ -80,6 +79,8 @@ hr {
   border-radius: 5px;
   border: 2px solid #353535d9;
   box-shadow: 0 0 22px #eeeeee45;
+  cursor: pointer;
+  position: relative;
 }
 
 #meetups {
@@ -107,8 +108,12 @@ hr {
   text-transform: capitalize;
 }
 
-.meetup-text h3:hover {
-  color: #ea722a;
+.meetup-text :hover {
+  color: #ff6500;
+}
+
+a.link {
+  text-decoration: none;
 }
 
 .meetups-hori {
@@ -130,7 +135,7 @@ hr {
 
 .meetup-cont:hover {
   border: 1px solid #e4e4e4e7;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 #overlay {

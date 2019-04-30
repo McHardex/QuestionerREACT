@@ -148,12 +148,6 @@ form.search-bar {
   transition: 0.2s ease-in-out;
 }
 
-.search-meetup:hover {
-  /* border: solid 1px #555; */
-  font-size: 24px;
-  padding: 10px 40px;
-}
-
 ::placeholder {
   font-weight: 100;
 }
@@ -161,8 +155,9 @@ form.search-bar {
 .create-meetup {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   line-height: 2.5;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .form-input {
@@ -219,53 +214,18 @@ hr {
   background: #7e696963;
 }
 
-#meetups {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-gap: 30px;
-  width: 90%;
-  margin: 0 auto;
+.tags-cont {
+  display: flex;
+  justify-content: space-between;
 }
 
-.meetup-cont {
-  text-align: center;
-  background: transparent;
-  color: #ccc;
-  min-height: 65vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+input.form-input.tags {
+  width: 33%;
   border-radius: 5px;
-  border: 2px solid #353535d9;
-  position: relative;
-  box-shadow: 0 0 22px #eeeeee45;
 }
 
-.meetup-text span {
-  background-color: transparent;
-  padding: 7px;
-  color: #ccc;
-  font-weight: 600;
-  border-radius: 2px;
-  border: 1px solid #eeeeee52;
-}
-
-.meetup-text p {
-  font-size: 14px;
-}
-
-.meetup-text h3 {
-  font-size: 15px;
-  text-transform: capitalize;
-}
-
-.meetup-text {
-  height: 55vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding: 0 10px;
-  color: #fff;
+.form-input:focus {
+  border: solid 2px #ffffff;
 }
 
 i.fas.fa-trash, i.far.fa-edit {
