@@ -304,6 +304,25 @@ i.far.fa-edit:hover, i.fas.fa-trash:hover{
   font-weight: 900;
 }
 
+input.ReactTags__tagInputField {
+  font-size: 20px;
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 8px 10px;
+  border-radius: 5px;
+  outline: none;
+  color: #fff;
+  margin-top: 30px;
+}
+
+span.tag-wrapper.ReactTags__tag {
+  border: 1px solid #fff;
+  padding: 8px;
+  border-radius: 5px;
+  margin-right: 10px;
+
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   #meetups {
     grid-template-columns: repeat(1, minmax(0, 1fr));
