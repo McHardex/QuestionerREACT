@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: 'http://localhost:2000/api/v1/',
+  baseURL: 'http://localhost:2000/api/v1',
   headers: {
     'x-auth-token': {
       toString() {
@@ -12,3 +12,4 @@ const http = axios.create({
 });
 
 export default http;
+// https://questioner-mchardex.herokuapp.com/api/v1;

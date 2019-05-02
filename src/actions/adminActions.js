@@ -20,8 +20,9 @@ export const createMeetup = (data, succesCallBack) => ((dispatch) => {
         dispatch(createMeetupSuccess(res));
         succesCallBack();
       })
-      .catch((res) => {
-        dispatch(createMeetupError(res.response.data.error));
+      .catch((err) => {
+        console.log(err.response.data.error);
+        dispatch(createMeetupError(err.response.data.error));
       })
   );
 });

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import '../assets/stylesheets/admin.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { WithContext as ReactTags } from 'react-tag-input';
 import propTypes from 'prop-types';
 import Header from './Header';
 import Label from './Label';
 import { getCurrentUser, getAllMeetups } from '../actions/meetupActions';
+import { createMeetup } from '../actions/adminActions';
 
 
 class Admin extends Component {
@@ -16,11 +18,34 @@ class Admin extends Component {
       searchValue: null,
       length: null,
       meetup: null,
+      tags: [],
     };
   }
 
+  // tags handlers
+  handleDelete = (i) => {
+    const { tags } = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    });
+  }
 
-  onChange = (e) => {
+  handleAddition = (tag) => {
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+  }
+
+  handleDrag = (tag, currPos, newPos) => {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({ tags: newTags });
+  }
+
+  searchMeetups = (e) => {
     e.preventDefault();
     // window.scroll({ bottom: '50%', right: 0, behavior: 'smooth' });
     const searchContent = e.target.value.toLowerCase();
@@ -35,6 +60,28 @@ class Admin extends Component {
       searchValue: e.target.value,
       length: searchResult.length,
       meetup: searchResult,
+    });
+  }
+
+  postMeetup = (e) => {
+    e.preventDefault();
+    const { tags } = this.state;
+    const tagInputs = tags.map(tag => tag.text);
+    const data = {
+      tags: tagInputs,
+    };
+    const { target } = e;
+    const formData = new FormData(target);
+    for (const entry of formData.entries()) {
+      const [keys, values] = entry;
+      data[keys] = values;
+    }
+
+    const { createMeetup, getAllMeetups } = this.props;
+    createMeetup(data, () => {
+      getAllMeetups();
+      target.reset();
+      this.setState({ tags: [] });
     });
   }
 
@@ -56,8 +103,12 @@ class Admin extends Component {
     const { meetups } = this.props;
     const { user } = meetups;
     const { isAdmin, username } = user;
-    const { meetup, length, searchValue } = this.state;
 
+    const {
+      meetup, length, searchValue, tags,
+    } = this.state;
+
+    // console.log(tags);
     return (
       <div className="admin-cont">
         <Header role={isAdmin} username={username} />
@@ -69,7 +120,7 @@ class Admin extends Component {
             </div>
           </div>
           <div className="cte-meetup-cont">
-            <form className="create-meetup" id="create-meetup">
+            <form className="create-meetup" id="create-meetup" onSubmit={this.postMeetup}>
               <Label htmlFor="topic">Topic</Label>
               <input className="form-input" name="topic" type="text" required />
               <Label htmlFor="date">Date</Label>
@@ -78,9 +129,14 @@ class Admin extends Component {
               <input className="form-input" name="location" type="text" required />
               <Label htmlFor="tags">Tags</Label>
               <div className="tags-cont">
-                <input className="form-input tags" name="tags[]" type="text" required />
-                <input className="form-input tags" name="tags[]" type="text" required />
-                <input className="form-input tags" name="tags[]" type="text" required />
+                <ReactTags
+                  tags={tags}
+                  labelField="text"
+                  handleDelete={this.handleDelete}
+                  handleAddition={this.handleAddition}
+                  handleDrag={this.handleDrag}
+                  maxLength={12}
+                />
               </div>
               <button type="submit" className="submit-form">Create Meetup</button>
             </form>
@@ -93,7 +149,7 @@ class Admin extends Component {
               autoComplete="on"
               placeholder="Search meetup by title, location or tags"
               className="search-meetup"
-              onChange={this.onChange}
+              onChange={this.searchMeetups}
               tabIndex="-2"
             />
           </div>
@@ -162,9 +218,10 @@ class Admin extends Component {
 Admin.propTypes = {
   getCurrentUser: propTypes.func.isRequired,
   getAllMeetups: propTypes.func.isRequired,
+  createMeetup: propTypes.func.isRequired,
   meetups: propTypes.shape.isRequired,
 };
 
 const mapStateToProps = ({ admin, meetups }) => ({ admin, meetups });
 
-export default connect(mapStateToProps, { getCurrentUser, getAllMeetups })(Admin);
+export default connect(mapStateToProps, { getCurrentUser, getAllMeetups, createMeetup })(Admin);

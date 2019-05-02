@@ -35,11 +35,10 @@ class Signup extends Component {
       const [keys, values] = entry;
       data[keys] = values;
     }
-    // eslint-disable-next-line no-shadow
+
     const { signUpUser } = this.props;
     signUpUser(data, () => this.resetForm(target));
 
-    // change Loading state
     this.setState({ isLoading: true });
   }
 

@@ -23,7 +23,6 @@ class MeetupDetails extends Component {
 
     this.state = {
       id: null,
-      // error: false,
     };
   }
 
@@ -32,11 +31,6 @@ class MeetupDetails extends Component {
     const { id } = this.state;
     const { getRsvp } = this.props;
     getRsvp(id);
-    this.clearError();
-
-    setTimeout(() => {
-      // this.setState({ error: false });
-    }, 5000);
   }
 
   // post rsvp response
@@ -79,11 +73,6 @@ class MeetupDetails extends Component {
     });
   }
 
-  // clear post question error
-  clearError = () => {
-    // this.setState({ error: false });
-  }
-
   // upvote and downvote a question
   upvoteQuestion = (questionId) => {
     const { id } = this.state;
@@ -122,7 +111,6 @@ class MeetupDetails extends Component {
 
   componentWillReceiveProps = () => {
     this.setState({
-      // error: nextProps.meetups.messageStatus,
     });
   }
 
@@ -184,33 +172,6 @@ class MeetupDetails extends Component {
           upvote={this.upvoteQuestion}
           comment={this.postComment}
         />
-        {/* question post error */}
-        {/* <CSSTransition
-          in={error}
-          timeout={5000}
-          classNames="alert"
-          unmountOnExit
-          onExited={() => this.clearError}
-        >
-          <div className="error-cont" id="error-div">
-            <p id="error">{postQuestionMessage}</p>
-            <span id="exit-error" role="presentation" onClick={this.clearError} onKeyDown={this.clearError}>X</span>
-          </div>
-        </CSSTransition> */}
-
-        {/* rsvp post error */}
-        {/* <CSSTransition
-          in={error}
-          timeout={3000}
-          classNames="alert"
-          unmountOnExit
-          onExited={() => this.clearError}
-        >
-          <div className="error-cont" id="error-div">
-            <p id="error">{rsvpPostMessage}</p>
-            <span id="exit-error" role="presentation" onClick={this.clearError} onKeyDown={this.clearError}>X</span>
-          </div>
-        </CSSTransition> */}
       </div>
     );
   }
