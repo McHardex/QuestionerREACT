@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actionTypes';
 import contentLoading from './contentLoading';
-import http from '../lib/http';
+import http from '../utils/http';
 
 // get single meetups success and error response
 export const getSingleMeetupSuccess = meetup => ({
@@ -128,7 +128,7 @@ export const upvoteAndDownvoteQuestion = (questionId, successCallback) => ((disp
         successCallback();
       })
       .catch((err) => {
-        throw new Error(err);
+        throw new Error(err.response.data.error);
       })
   );
 });

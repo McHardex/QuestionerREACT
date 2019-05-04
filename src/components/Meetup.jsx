@@ -110,7 +110,11 @@ class Meetup extends Component {
                           <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
                           <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
                           <p className="loctn">{meetup.location}</p>
-                          <span>{meetup.tags.join(' ')}</span>
+                          <div className="tags-cont">
+                            {meetup.tags.map(tag => (
+                              <span key={tag}>{tag}</span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </Link>

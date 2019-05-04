@@ -1,5 +1,5 @@
 import actionTypes from '../constants/actionTypes';
-import http from '../lib/http';
+import http from '../utils/http';
 
 export const signUpSuccess = user => ({
   type: actionTypes.SIGNUP_SUCCESS,
@@ -36,6 +36,6 @@ export const loginUser = (data, succesCallBack) => dispatch => http.post('/auth/
     localStorage.setItem('token', JSON.stringify(token));
     succesCallBack();
   })
-  .catch((res) => {
-    dispatch(loginError(res.response.data.error));
+  .catch((err) => {
+    dispatch(loginError(err.response.data.error));
   });
