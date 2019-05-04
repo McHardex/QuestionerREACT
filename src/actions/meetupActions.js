@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actionTypes';
 import contentLoading from './contentLoading';
-import http from '../lib/http';
+import http from '../utils/http';
 
 
 export const getAllMeetupsSuccess = meetups => ({

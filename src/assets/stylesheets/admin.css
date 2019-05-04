@@ -216,7 +216,7 @@ hr {
 
 .tags-cont {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 input.form-input.tags {
@@ -305,22 +305,34 @@ i.far.fa-edit:hover, i.fas.fa-trash:hover{
 }
 
 input.ReactTags__tagInputField {
-  font-size: 20px;
+  font-size: 16px;
   background: transparent;
   border: 1px solid #fff;
   padding: 8px 10px;
   border-radius: 5px;
   outline: none;
   color: #fff;
-  margin-top: 30px;
+  margin: 5px 0;
+  width: 85%;
 }
 
 span.tag-wrapper.ReactTags__tag {
-  border: 1px solid #fff;
-  padding: 8px;
+  color: #cecece;
+  border: 1px solid #212121;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 5px;
+  text-align: center;
+  background: #5f5f5f52;
+}
 
+.ReactTags__tags.react-tags-wrapper {
+  width: 60%;
+}
+
+.ReactTags__selected {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-row-gap: 5px;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -340,6 +352,18 @@ span.tag-wrapper.ReactTags__tag {
 
   .user span {
     display: none;
+  }
+
+  .tags-cont {
+    font-size: 10px;
+  }
+
+  .ReactTags__tags.react-tags-wrapper {
+    width: 100%;
+  }
+  
+  .ReactTags__selected {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

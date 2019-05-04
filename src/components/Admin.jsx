@@ -22,7 +22,6 @@ class Admin extends Component {
     };
   }
 
-  // tags handlers
   handleDelete = (i) => {
     const { tags } = this.state;
     this.setState({
@@ -35,19 +34,18 @@ class Admin extends Component {
   }
 
   handleDrag = (tag, currPos, newPos) => {
-    const tags = [...this.state.tags];
+    const { tags: tagsInState } = this.state;
+    const tags = [...tagsInState];
     const newTags = tags.slice();
 
     newTags.splice(currPos, 1);
     newTags.splice(newPos, 0, tag);
 
-    // re-render
     this.setState({ tags: newTags });
   }
 
   searchMeetups = (e) => {
     e.preventDefault();
-    // window.scroll({ bottom: '50%', right: 0, behavior: 'smooth' });
     const searchContent = e.target.value.toLowerCase();
     const { meetups } = this.props;
     const searchResult = meetups.meetups.filter(meetup => (
@@ -108,7 +106,6 @@ class Admin extends Component {
       meetup, length, searchValue, tags,
     } = this.state;
 
-    // console.log(tags);
     return (
       <div className="admin-cont">
         <Header role={isAdmin} username={username} />
@@ -128,7 +125,7 @@ class Admin extends Component {
               <Label htmlFor="location">Location</Label>
               <input className="form-input" name="location" type="text" required />
               <Label htmlFor="tags">Tags</Label>
-              <div className="tags-cont">
+              <div className="tags-cont-show">
                 <ReactTags
                   tags={tags}
                   labelField="text"
@@ -156,24 +153,6 @@ class Admin extends Component {
           <div id="overlay" />
           <div className="meetups" id="meetups" />
         </div>
-        {/* form edit */}
-        {/* <div className="form-edit-cont" id="modal">
-          <p id="edit-success">Meetup Updated Successfully</p>
-          <form className="editform">
-            <Label htmlFor="topic">Topic</Label>
-            <input className="form-input" name="topic" type="text" id="topic" required />
-            <Label htmlFor="date">Date</Label>
-            <input className="form-input empty" name="happeningOn" id="happeningOn" type="date" required />
-            <Label htmlFor="location">Location</Label>
-            <input className="form-input" name="location" type="text" id="location" required />
-            <Label htmlFor="tags">Tags</Label>
-            <input className="form-input" name="tags[]" type="text" id="edit-tag1" required />
-            <input className="form-input" name="tags[]" type="text" id="edit-tag2" required />
-            <input className="form-input" name="tags[]" type="text" id="edit-tag3" required />
-            <button type="submit" className="update-form">Update Meetup</button>
-            <span className="close-div" id="closeModal">X</span>
-          </form>
-        </div> */}
         {length === 0
           ? (
             <div className="meetups">
@@ -198,7 +177,11 @@ class Admin extends Component {
                         <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
                         <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
                         <p className="loctn">{meetup.location}</p>
-                        <span>{meetup.tags.join(' ')}</span>
+                        <div className="tags-cont">
+                          {meetup.tags.map(tag => (
+                            <span key={tag}>{tag}</span>
+                          ))}
+                        </div>
                       </div>
                       <i className="fas fa-trash" title="delete" id={meetup.id} />
                       <i className="far fa-edit" title="edit" id={meetup.id} />
@@ -219,7 +202,7 @@ Admin.propTypes = {
   getCurrentUser: propTypes.func.isRequired,
   getAllMeetups: propTypes.func.isRequired,
   createMeetup: propTypes.func.isRequired,
-  meetups: propTypes.shape.isRequired,
+  meetups: propTypes.objectOf(propTypes.shape).isRequired,
 };
 
 const mapStateToProps = ({ admin, meetups }) => ({ admin, meetups });
