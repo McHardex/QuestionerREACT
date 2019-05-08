@@ -1,33 +1,16 @@
-/* eslint-disable no-shadow */
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import { loginUser } from '../actions/authActions';
+import { clearError } from '../actions/action.helpers';
 import '../assets/stylesheets/login.css';
 import logo from '../assets/images/logo.png';
 import Loader from './Loader';
+import DisplayMessage from './DisplayMessage';
 
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      isLoading: false,
-      redirect: false,
-    };
-  }
-
-  redirect = () => {
-    this.setState({
-      redirect: true,
-      isLoading: false,
-    });
-  }
-
   login = (e) => {
     e.preventDefault();
     const data = {};
@@ -40,35 +23,19 @@ class Login extends Component {
     }
 
     const { loginUser } = this.props;
-    loginUser(data, () => this.redirect());
-
-    // change Loading state
-    this.setState({ isLoading: true });
+    loginUser(data);
   }
 
   clearError = () => {
-    this.setState({
-      error: false,
-    });
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    this.setState({
-      error: nextProps.auth.error,
-      isLoading: nextProps.auth.isLoading,
-    });
-  }
-
-  componentWillUnmount = () => {
-    this.state.error = false;
-    this.state.isLoading = false;
+    const { clearError } = this.props;
+    clearError();
   }
 
   render() {
     const { auth } = this.props;
     const {
-      error, isLoading, redirect,
-    } = this.state;
+      loginError, isLoading, errorMessage,
+    } = auth;
     return (
       <div className="login-cont">
         <div className="col1">
@@ -99,32 +66,29 @@ class Login extends Component {
         </div>
         <div className="col2">
           <h1>
-        Lets create the future
-            {' '}
+            Lets create the future
             <strong>together</strong>
           </h1>
           <Link to="/signup" className="getstarted">Get started today</Link>
         </div>
-        <CSSTransition
-          in={error}
-          timeout={5000}
-          classNames="alert"
-          unmountOnExit
-          onExited={() => this.clearError}
-        >
-          <div className="error-cont" id="error-div">
-            <p id="error">{auth.loginError}</p>
-            <span id="exit-error" role="presentation" onClick={this.clearError} onKeyDown={this.clearError}>X</span>
-          </div>
-        </CSSTransition>
-        { isLoading && <Loader />}
-        { redirect && <Redirect to="/meetups" /> }
+        <DisplayMessage
+          error={loginError}
+          message={errorMessage}
+          onClick={this.clearError}
+        />
+        {isLoading && <Loader />}
       </div>
     );
   }
 }
 
+Login.propTypes = {
+  auth: propTypes.shape({
+  }).isRequired,
+  loginUser: propTypes.func.isRequired,
+  clearError: propTypes.func.isRequired,
+};
 
 const mapStateToProps = auth => auth;
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser, clearError })(Login);

@@ -1,28 +1,28 @@
 import actionTypes from '../constants/actionTypes';
-import contentLoading from './contentLoading';
+import { contentLoading } from './action.helpers';
 import http from '../utils/http';
 
-export const getQuestionCountSuccess = count => ({
+const getQuestionCountSuccess = count => ({
   type: actionTypes.USER_QUESTION_COUNT_SUCCESS,
   count,
 });
 
-export const getQuestionCountError = error => ({
+const getQuestionCountError = error => ({
   type: actionTypes.USER_QUESTION_COUNT_ERROR,
   error,
 });
 
-export const getCommentCount = count => ({
+const getCommentCount = count => ({
   type: actionTypes.USER_COMMENT_COUNT_SUCCESS,
   count,
 });
 
-export const getUpcomingMeetupsSuccess = upcoming => ({
+const getUpcomingMeetupsSuccess = upcoming => ({
   type: actionTypes.FETCH_UPCOMING_MEETUP_SUCCESS,
   upcoming,
 });
 
-export const getUpcomingMeetupsError = error => ({
+const getUpcomingMeetupsError = error => ({
   type: actionTypes.FETCH_UPCOMING_MEETUP_ERROR,
   error,
 });

@@ -11,6 +11,7 @@ table {
   width: 80%;
   background: transparent;
   box-shadow: 0 0 56px #9d260e14;
+  cursor: default;
 }
 
 td {
@@ -21,10 +22,6 @@ td {
 td:nth-child(even) {
   color: antiquewhite;
   font-size: 20px;
-}
-
-tr:hover {
-  background-color: #cccccc63;
 }
 
 th {
@@ -70,11 +67,10 @@ th {
   text-align: center;
 }
 
-hr {
+.have-acc hr {
   border: none;
   height: 1px;
   background: #ccc;
-  width: 90%;
 }
 
 #upcoming-meetups {
@@ -100,27 +96,6 @@ hr {
 a.cte-meetup {
   cursor: pointer;
   display: none;
-}
-
-#loader {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 200px;
-  height: 100px;
-  margin: auto;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-}
-
-#loader img {
-  height: 60px;
-  background: #363636;
-  border-radius: 50px;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

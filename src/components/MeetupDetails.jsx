@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { CSSTransition } from 'react-transition-group';
-import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Header from './Header';
 import QuestionsAndComments from './QuestionsAndComments';
 import { getCurrentUser } from '../actions/meetupActions';
-
+import { clearError } from '../actions/action.helpers';
+import DisplayMessage from './DisplayMessage';
 import {
   getSingleMeetup,
   getRsvp, postRsvp,
@@ -109,33 +108,32 @@ class MeetupDetails extends Component {
     meetups.messageStatus = false;
   }
 
-  componentWillReceiveProps = () => {
-    this.setState({
-    });
+  clearError = () => {
+    const { clearError } = this.props;
+    clearError();
   }
 
   render() {
     const { meetups } = this.props;
-    const { user } = meetups;
+    const {
+      user,
+      rsvpPostSuccess,
+      rsvpPostError,
+      message,
+      isLoading,
+      getRsvpMessage,
+      postQuestionError,
+    } = meetups;
+
     const { isAdmin, username } = user;
 
-    const {
-      contentLoading, getRsvpMessage,
-    } = meetups;
     const meetup = meetups.meetup[0];
-
-    const token = JSON.parse(localStorage.getItem('token'));
-    if (!token) {
-      return (
-        <Redirect to="/login" />
-      );
-    }
 
     const { id } = this.state;
 
     return (
       <div className="m-details-cont">
-        {contentLoading && <Loader />}
+        {isLoading && <Loader />}
         <Header role={isAdmin} username={username} />
         <div className="m-cont">
           <div className="m-image" />
@@ -158,10 +156,40 @@ class MeetupDetails extends Component {
           </div>
         </div>
         <form id="rsvp-submit" type="submit" onSubmit={this.postRsvp}>
-          <input type="text" className="rsvp-val" name="response" placeholder="Will you love to attend this meetup?" autoComplete="off" required />
+          <input
+            type="text"
+            className="rsvp-val"
+            name="response"
+            placeholder="Will you love to attend this meetup?"
+            autoComplete="off"
+            required
+          />
+          <DisplayMessage
+            error={rsvpPostSuccess}
+            message={message}
+            onClick={this.clearError}
+            successClass="success-disp-msg"
+          />
+          <DisplayMessage
+            error={rsvpPostError}
+            message={message}
+            onClick={this.clearError}
+          />
+          <DisplayMessage
+            error={postQuestionError}
+            message={message}
+            onClick={this.clearError}
+          />
         </form>
         <form id="question-submit" onSubmit={this.postQuestion}>
-          <input type="text" className="question-val" name="title" placeholder="Ask your question" autoComplete="off" required />
+          <input
+            type="text"
+            className="question-val"
+            name="title"
+            placeholder="Ask your question"
+            autoComplete="off"
+            required
+          />
           <button type="submit" className="submit-ques">Send your question</button>
         </form>
         <hr />
@@ -192,6 +220,7 @@ MeetupDetails.propTypes = {
   upvoteAndDownvoteQuestion: propTypes.func.isRequired,
   postComments: propTypes.func.isRequired,
   getCurrentUser: propTypes.func.isRequired,
+  clearError: propTypes.func.isRequired,
   match: propTypes.shape(propTypes.objectOf).isRequired,
 };
 
@@ -205,4 +234,5 @@ export default connect(mapStateToProps, {
   upvoteAndDownvoteQuestion,
   postComments,
   getCurrentUser,
+  clearError,
 })(MeetupDetails);
