@@ -1,53 +1,55 @@
 import actionTypes from '../constants/actionTypes';
-import contentLoading from './contentLoading';
+import { contentLoading } from './action.helpers';
 import http from '../utils/http';
 
 // get single meetups success and error response
-export const getSingleMeetupSuccess = meetup => ({
+const getSingleMeetupSuccess = meetup => ({
   type: actionTypes.SINGLE_MEETUP_SUCCESS,
   meetup,
 });
 
-export const getSingleMeetupError = error => ({
+const getSingleMeetupError = error => ({
   type: actionTypes.SINGLE_MEETUP_ERROR,
   error,
 });
 
 // get rsvp fetch success and length
-export const getRsvpSuccess = rsvp => ({
+const getRsvpSuccess = rsvp => ({
   type: actionTypes.RSVP_GET_SUCCESS,
   rsvp,
 });
 
 // rsvp on a specific meetup
-export const rsvpPostMessage = rsvp => ({
+const rsvpPostSuccess = message => ({
   type: actionTypes.RSVP_POST_SUCCESS,
-  rsvp,
+  message,
+});
+const rsvpPostError = error => ({
+  type: actionTypes.RSVP_POST_ERROR,
+  error,
 });
 
 
-export const postQuestionSuccess = question => ({
+const postQuestionSuccess = () => ({
   type: actionTypes.POST_QUESTION_SUCCESS,
-  question,
 });
 
-export const postQuestionError = error => ({
+const postQuestionError = error => ({
   type: actionTypes.POST_QUESTION_ERROR,
   error,
 });
 
 
-export const likeSuccess = upvote => ({
+const likeSuccess = upvote => ({
   type: actionTypes.UPVOTE_DOWNVOTE_SUCCESS,
   upvote,
 });
 
-export const postCommentSuccess = comment => ({
+const postCommentSuccess = () => ({
   type: actionTypes.POST_COMMENT_SUCCESS,
-  comment,
 });
 
-export const postCommentError = error => ({
+const postCommentError = error => ({
   type: actionTypes.POST_COMMENT_ERROR,
   error,
 });
@@ -88,17 +90,16 @@ export const getRsvp = meetupID => ((dispatch) => {
 });
 
 // // rsvp on a meetup
-export const postRsvp = (meetupID, data, clearSuccessOrErrorMessage) => ((dispatch) => {
+export const postRsvp = (meetupID, data, successCallback) => ((dispatch) => {
   dispatch(contentLoading());
   return (
     http.post(`/meetups/${meetupID}/rsvps`, data)
       .then(() => {
-        dispatch(rsvpPostMessage('Your response has been recorded'));
-        clearSuccessOrErrorMessage();
+        dispatch(rsvpPostSuccess('Your response has been recorded'));
+        successCallback();
       })
       .catch((err) => {
-        dispatch(rsvpPostMessage(err.response.data.error));
-        clearSuccessOrErrorMessage();
+        dispatch(rsvpPostError(err.response.data.error));
       })
   );
 });

@@ -1,24 +1,24 @@
 import actionTypes from '../constants/actionTypes';
-import contentLoading from './contentLoading';
+import { contentLoading } from './action.helpers';
 import http from '../utils/http';
 
 
-export const getAllMeetupsSuccess = meetups => ({
+const getAllMeetupsSuccess = meetups => ({
   type: actionTypes.FETCH_MEETUPS_SUCCESS,
   meetups,
 });
 
-export const getAllMeetupsError = error => ({
+const getAllMeetupsError = error => ({
   type: actionTypes.FETCH_MEETUPS_ERROR,
   error,
 });
 
-export const getCurrentUserSuccess = user => ({
+const getCurrentUserSuccess = user => ({
   type: actionTypes.FETCH_USER_SUCCESS,
   user,
 });
 
-export const getCurrentUserError = error => ({
+const getCurrentUserError = error => ({
   type: actionTypes.FETCH_USER_ERROR,
   error,
 });

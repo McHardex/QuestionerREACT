@@ -112,21 +112,21 @@ label {
   font-size: 12px;
 }
 
-.submit-form {
+.submit-signup-form {
   background: linear-gradient(to right,#f05a28 0,#e80a89 100%);
   border: none;
   text-decoration: none;
   border-radius: 2px;
   cursor: pointer;
   float: left;
-  margin: 30px 0;
+  margin: 20px;
   padding: 10px 60px;
   color: #f2f2f2;
   font-size: 15px;
   width: 20%;
 }
 
-.submit-form:hover {
+.submit-signup-form:hover {
   border: 1px solid #f96816;
   color: #f96816;
   text-decoration: none;
@@ -144,6 +144,7 @@ label {
   margin: 0;
   text-align: center;
   font-weight: 600;
+  text-transform: capitalize;
 }
 
 .error-cont span {
@@ -156,6 +157,10 @@ label {
   cursor: pointer;
   font-size: 26px;
   font-weight: 900;
+}
+
+.success-disp-msg {
+  background: #295001;
 }
 
 .alert-enter {
@@ -212,7 +217,7 @@ label {
     font-size: 12px;
   }
 
-  .submit-form {
+  .submit-signup-form {
     width: 45%;
   }
 }

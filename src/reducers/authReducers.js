@@ -1,32 +1,39 @@
 import actionType from '../constants/actionTypes';
 
 const initialState = {
-  user: {},
-  signUpSuccess: false,
-  error: false,
-  signUpError: null,
-  loginError: null,
-  loginSuccess: false,
+  errorMessage: null,
+  signupSuccess: false,
+  signupError: false,
+  loginError: false,
   isLoading: false,
+  redirect: false,
 };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.CONTENT_LOADING:
+      return {
+        ...state, isLoading: true,
+      };
+    case actionType.CLEAR_ERROR:
+      return {
+        ...state, signupError: false, loginError: false,
+      };
     case actionType.SIGNUP_SUCCESS:
       return {
-        ...state, user: action.user, signUpSuccess: true, error: false,
+        ...state, isLoading: false, signupError: false, signupSuccess: true,
       };
     case actionType.SIGNUP_ERROR:
       return {
-        ...state, signUpError: action.error, error: true, signUpSuccess: false, isLoading: false,
+        ...state, errorMessage: action.error, isLoading: false, signupError: true,
       };
     case actionType.LOGIN_SUCCESS:
       return {
-        ...state, user: action.user, error: false, loginSuccess: true,
+        ...state, isLoading: false, loginError: false, redirect: true,
       };
     case actionType.LOGIN_ERROR:
       return {
-        ...state, loginError: action.error, error: true, loginSuccess: false, isLoading: false,
+        ...state, errorMessage: action.error, loginError: true, isLoading: false,
       };
     default:
       return state;

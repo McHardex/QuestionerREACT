@@ -1,28 +1,19 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { signUpUser } from '../actions/authActions';
+import { clearError } from '../actions/action.helpers';
 import '../assets/stylesheets/signup.css';
 import Label from './Label.jsx';
 import logo from '../assets/images/logo.png';
 import Loader from './Loader';
+import DisplayMessage from './DisplayMessage';
 
 class Signup extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      signUpSuccess: false,
-      error: false,
-      isLoading: false,
-    };
-  }
-
   resetForm = (target) => {
     target.reset();
-    this.setState({ isLoading: false });
   }
 
   signUpUser = (e) => {
@@ -38,36 +29,19 @@ class Signup extends Component {
 
     const { signUpUser } = this.props;
     signUpUser(data, () => this.resetForm(target));
-
-    this.setState({ isLoading: true });
   }
 
   clearError = () => {
-    this.setState({
-      error: false,
-    });
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    this.setState({
-      signUpSuccess: nextProps.auth.signUpSuccess,
-      error: nextProps.auth.error,
-      isLoading: nextProps.auth.isLoading,
-    });
+    const { clearError } = this.props;
+    clearError();
   }
 
   render() {
     const { auth } = this.props;
-    const { error, signUpSuccess, isLoading } = this.state;
-    if (error) {
-      setTimeout(() => {
-        this.setState({
-          error: false,
-        });
-      }, 20000);
-    }
+    const { errorMessage, signupError, signupSuccess } = auth;
     return (
       <div>
+        {auth.isLoading && <Loader />}
         <header>
           <div className="header-cont">
             <div className="nav1">
@@ -169,46 +143,42 @@ class Signup extends Component {
                 />
               </div>
             </div>
-            <p className="required">
-              <sup>*</sup>
-              Required
-            </p>
             <CSSTransition
-              in={signUpSuccess}
+              in={signupSuccess}
               timeout={5000}
               classNames="alert"
               unmountOnExit
             >
               <p id="success">
-                  Account Successfully Created
-                {' '}
+                Account Successfully Created
                 <Link to="login"> Log in</Link>
               </p>
             </CSSTransition>
-            <button type="submit" className="submit-form" id="submit-form">
+            <button type="submit" className="submit-signup-form">
               Sign up
             </button>
+            <p className="required">
+              <sup>*</sup>
+              Required
+            </p>
           </form>
         </div>
-        <CSSTransition
-          in={error}
-          timeout={5000}
-          classNames="alert"
-          unmountOnExit
-          onExited={() => this.clearError}
-        >
-          <div className="error-cont" id="error-div">
-            <p id="error">{auth.signUpError}</p>
-            <span id="exit-error" role="presentation" onClick={this.clearError} onKeyDown={this.clearError}>X</span>
-          </div>
-        </CSSTransition>
-        {
-          isLoading && <Loader />
-        }
+        <DisplayMessage
+          error={signupError}
+          message={errorMessage}
+          onClick={this.clearError}
+        />
       </div>
     );
   }
 }
 
+Signup.propTypes = {
+  auth: propTypes.shape({
+  }).isRequired,
+  signUpUser: propTypes.func.isRequired,
+  clearError: propTypes.func.isRequired,
+};
+
 const mapStateToProps = auth => auth;
-export default connect(mapStateToProps, { signUpUser })(Signup);
+export default connect(mapStateToProps, { signUpUser, clearError })(Signup);

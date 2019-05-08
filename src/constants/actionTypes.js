@@ -2,6 +2,9 @@ const actionType = {
   // content loading
   CONTENT_LOADING: 'CONTENT_LOADING',
 
+  // clear error
+  CLEAR_ERROR: 'CLEAR_ERROR',
+
   // auth action types
   SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
   SIGNUP_ERROR: 'SIGNUP_ERROR',
@@ -25,6 +28,7 @@ const actionType = {
 
   // rsvp post action type
   RSVP_POST_SUCCESS: 'RSVP_POST_SUCCESS',
+  RSVP_POST_ERROR: 'RSVP_POST_ERROR',
 
   // post question success and error action types
   POST_QUESTION_SUCCESS: 'POST_QUESTION_SUCCESS',

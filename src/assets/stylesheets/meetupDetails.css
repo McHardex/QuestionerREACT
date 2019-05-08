@@ -212,10 +212,18 @@ input.rsvp-val:hover {
   border: 1px solid #ffffff80;
 }
 
-.rsvp-msg {
+.rsvp-msg.error {
   font-size: 18px;
   color: #ff0707;
-  margin-top: 20px;
+  margin-top: 10px;
+  transition: 10s;
+}
+
+.rsvp-msg.sucess {
+  font-size: 18px;
+  color: #019c30;
+  margin-top: 10px;
+  transition: 10s;
 }
 
 .rsvp-succ-msg {

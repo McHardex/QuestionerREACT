@@ -47,9 +47,6 @@ class Meetup extends Component {
     });
   }
 
-  componentWillUnmount = () => {
-    this.state.meetup = null;
-  }
 
   render() {
     const { meetups } = this.props;

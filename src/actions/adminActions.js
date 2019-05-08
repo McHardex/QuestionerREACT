@@ -1,16 +1,19 @@
 import actionTypes from '../constants/actionTypes';
 import http from '../utils/http';
-import contentLoading from './contentLoading';
+import { contentLoading } from './action.helpers';
 
-export const createMeetupSuccess = () => ({
+const createMeetupSuccess = () => ({
   type: actionTypes.POST_MEETUP_SUCCESS,
 });
 
-export const createMeetupError = error => ({
+const createMeetupError = error => ({
   type: actionTypes.POST_MEETUP_ERROR,
   error,
 });
 
+export const clearError = () => ({
+  type: actionTypes.CLEAR_ERROR,
+});
 
 export const createMeetup = (data, succesCallBack) => ((dispatch) => {
   dispatch(contentLoading());
@@ -21,7 +24,6 @@ export const createMeetup = (data, succesCallBack) => ((dispatch) => {
         succesCallBack();
       })
       .catch((err) => {
-        console.log(err.response.data.error);
         dispatch(createMeetupError(err.response.data.error));
       })
   );

@@ -7,8 +7,9 @@ import propTypes from 'prop-types';
 import Header from './Header';
 import Label from './Label';
 import { getCurrentUser, getAllMeetups } from '../actions/meetupActions';
-import { createMeetup } from '../actions/adminActions';
-
+import { createMeetup, clearError } from '../actions/adminActions';
+import DisplayMessage from './DisplayMessage';
+import Loader from './Loader';
 
 class Admin extends Component {
   constructor(props) {
@@ -83,6 +84,11 @@ class Admin extends Component {
     });
   }
 
+  clearError = () => {
+    const { clearError } = this.props;
+    clearError();
+  }
+
   componentDidMount = () => {
     const {
       getCurrentUser, getAllMeetups,
@@ -98,7 +104,8 @@ class Admin extends Component {
   }
 
   render() {
-    const { meetups } = this.props;
+    const { meetups, admin } = this.props;
+    const { message, postMeetupError, isLoading } = admin;
     const { user } = meetups;
     const { isAdmin, username } = user;
 
@@ -108,6 +115,11 @@ class Admin extends Component {
 
     return (
       <div className="admin-cont">
+        <DisplayMessage
+          error={postMeetupError}
+          message={message}
+          onClick={this.clearError}
+        />
         <Header role={isAdmin} username={username} />
         <div className="cont">
           <div className="create-meetup-bk">
@@ -192,19 +204,26 @@ class Admin extends Component {
             </div>
           )
         }
+        {isLoading && <Loader />}
       </div>
     );
   }
 }
 
-
 Admin.propTypes = {
   getCurrentUser: propTypes.func.isRequired,
   getAllMeetups: propTypes.func.isRequired,
   createMeetup: propTypes.func.isRequired,
+  clearError: propTypes.func.isRequired,
   meetups: propTypes.objectOf(propTypes.shape).isRequired,
+  admin: propTypes.objectOf(propTypes.shape).isRequired,
 };
 
 const mapStateToProps = ({ admin, meetups }) => ({ admin, meetups });
 
-export default connect(mapStateToProps, { getCurrentUser, getAllMeetups, createMeetup })(Admin);
+export default connect(mapStateToProps, {
+  getCurrentUser,
+  getAllMeetups,
+  createMeetup,
+  clearError,
+})(Admin);
