@@ -97,24 +97,26 @@ class Meetup extends Component {
               <div className="meetups" id="meetups">
                 {
                   meetup && meetup.map(meetup => (
-                    <Link to={`/meetups/${meetup.id}`} className="link" key={meetup.id}>
-                      <div
-                        className="meetup-cont"
-                        role="presentation"
-                        key={meetup.id}
-                      >
-                        <div className="meetup-text">
-                          <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
-                          <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
-                          <p className="loctn">{meetup.location}</p>
-                          <div className="tags-cont">
-                            {meetup.tags.map(tag => (
-                              <span key={tag}>{tag}</span>
-                            ))}
+                    <div className="meetup-wrap" key={meetup.id}>
+                      <Link to={`/meetups/${meetup.id}`} className="link" key={meetup.id}>
+                        <div
+                          className="meetup-cont"
+                          role="presentation"
+                          key={meetup.id}
+                        >
+                          <div className="meetup-text">
+                            <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
+                            <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
+                            <p className="loctn">{meetup.location}</p>
+                            <div className="tags-cont">
+                              {meetup.tags.map(tag => (
+                                <span key={tag}>{tag}</span>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
                   ))
                 }
               </div>

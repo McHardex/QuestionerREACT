@@ -1,0 +1,86 @@
+.edit-form-cont {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ea722aad;
+}
+
+form.edit-form {
+  width: 40%;
+  background: #020101;
+  padding: 30px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.edit-input {
+  margin: 10px 0;
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #5f5d5c;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+  font-weight: 700;
+}
+
+.edit-input:focus {
+  border: 1px solid #ea722a;
+}
+
+button.submit-edit {
+  padding: 10px 40px;
+  border: none;
+  outline: none;
+  color: #ea722a;
+  background: #fff;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+button.submit-edit:hover {
+  color: #fff;
+  background: #ea722a;
+}
+
+.close-edit-tab {
+  color: #F44336;
+  font-size: 40px;
+  font-weight: 800;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+span.tag-wrapper.ReactTags__tag {
+  padding: 12px;
+}
+
+.ReactTags__tags.react-tags-wrapper {
+  width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  form.edit-form {
+    width: 80%;
+  }
+}
