@@ -103,21 +103,8 @@ a.cte-meetup {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
-  .meetup-cont {
-    margin: 10px;
-  }
-
-  .meetup-text h3 {
-    font-size: 16px;
-    color: #dd7836;
-  }
-
   .banner-text h1 {
     font-size: 30px;
-  }
-
-  .meetup-cont {
-    border-bottom: 1px solid #ea722a;
   }
 
   .up-header {

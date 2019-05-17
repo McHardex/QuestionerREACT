@@ -4,12 +4,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WithContext as ReactTags } from 'react-tag-input';
 import propTypes from 'prop-types';
+import { Confirm } from 'semantic-ui-react';
 import Header from './Header';
 import Label from './Label';
 import { getCurrentUser, getAllMeetups } from '../actions/meetupActions';
-import { createMeetup, clearError } from '../actions/adminActions';
+import { getSingleMeetup } from '../actions/meetupDetailsActions';
+import {
+  createMeetup, clearError, updateMeetup, deleteMeetup,
+} from '../actions/adminActions';
 import DisplayMessage from './DisplayMessage';
 import Loader from './Loader';
+import EditForm from './EditForm';
 
 class Admin extends Component {
   constructor(props) {
@@ -20,10 +25,13 @@ class Admin extends Component {
       length: null,
       meetup: null,
       tags: [],
+      editable: false,
+      showDeleteModal: false,
+      deleteId: null,
     };
   }
 
-  handleDelete = (i) => {
+  handleTagDelete = (i) => {
     const { tags } = this.state;
     this.setState({
       tags: tags.filter((tag, index) => index !== i),
@@ -84,6 +92,43 @@ class Admin extends Component {
     });
   }
 
+  editMeetup = (id, data) => {
+    const { updateMeetup, getAllMeetups } = this.props;
+    updateMeetup(id, data, () => {
+      getAllMeetups();
+      this.closeEditModal();
+    });
+  }
+
+  openEditModal = async (e) => {
+    e.preventDefault();
+    const { getSingleMeetup } = this.props;
+    const { id } = e.target;
+    await getSingleMeetup(id);
+    this.setState({ editable: true });
+  }
+
+  closeEditModal = () => {
+    this.setState({ editable: false });
+  }
+
+  deleteMeetup = () => {
+    const { deleteId } = this.state;
+    const { deleteMeetup } = this.props;
+    deleteMeetup(deleteId, () => {
+      getAllMeetups();
+      this.setState({ showDeleteModal: false });
+    });
+  }
+
+  showDeleteModal = (e) => {
+    const { showDeleteModal } = this.state;
+    this.setState({
+      showDeleteModal: !showDeleteModal,
+      deleteId: e.target.id,
+    });
+  }
+
   clearError = () => {
     const { clearError } = this.props;
     clearError();
@@ -105,18 +150,26 @@ class Admin extends Component {
 
   render() {
     const { meetups, admin } = this.props;
-    const { message, postMeetupError, isLoading } = admin;
-    const { user } = meetups;
-    const { isAdmin, username } = user;
-
+    const { user, meetup: singleMeetup } = meetups;
     const {
-      meetup, length, searchValue, tags,
+      message, postMeetupError, isLoading, deleteMeetupSuccess,
+    } = admin;
+    const { isAdmin, username } = user;
+    const {
+      meetup, length, searchValue, tags, editable, showDeleteModal,
     } = this.state;
+
 
     return (
       <div className="admin-cont">
         <DisplayMessage
           error={postMeetupError}
+          message={message}
+          onClick={this.clearError}
+        />
+        <DisplayMessage
+          successClass="success-disp-msg"
+          error={deleteMeetupSuccess}
           message={message}
           onClick={this.clearError}
         />
@@ -141,7 +194,7 @@ class Admin extends Component {
                 <ReactTags
                   tags={tags}
                   labelField="text"
-                  handleDelete={this.handleDelete}
+                  handleDelete={this.handleTagDelete}
                   handleAddition={this.handleAddition}
                   handleDrag={this.handleDrag}
                   maxLength={12}
@@ -170,7 +223,6 @@ class Admin extends Component {
             <div className="meetups">
               <p className="not-found">
                 Sorry, we could not find any meetups matching
-                {' '}
                 {`"${searchValue}"`}
               </p>
             </div>
@@ -179,32 +231,61 @@ class Admin extends Component {
             <div className="meetups" id="meetups">
               {
                 meetup && meetup.map(meetup => (
-                  <Link to={`/meetups/${meetup.id}`} className="link" key={meetup.id}>
-                    <div
-                      className="meetup-cont"
-                      role="presentation"
-                      key={meetup.id}
-                    >
-                      <div className="meetup-text">
-                        <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
-                        <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
-                        <p className="loctn">{meetup.location}</p>
-                        <div className="tags-cont">
-                          {meetup.tags.map(tag => (
-                            <span key={tag}>{tag}</span>
-                          ))}
+                  <div className="meetup-wrap" key={meetup.id}>
+                    <Link to={`/meetups/${meetup.id}`} className="link" key={meetup.id}>
+                      <div
+                        className="meetup-cont"
+                        role="presentation"
+                        key={meetup.id}
+                      >
+                        <div className="meetup-text">
+                          <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
+                          <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
+                          <p className="loctn">{meetup.location}</p>
+                          <div className="tags-cont">
+                            {meetup.tags.map(tag => (
+                              <span key={tag}>{tag}</span>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <i className="fas fa-trash" title="delete" id={meetup.id} />
-                      <i className="far fa-edit" title="edit" id={meetup.id} />
-                    </div>
-                  </Link>
+                    </Link>
+                    <i
+                      role="presentation"
+                      className="fas fa-trash"
+                      title="delete"
+                      onClick={this.showDeleteModal}
+                      id={meetup.id}
+                    />
+                    <i
+                      className="far fa-edit"
+                      role="presentation"
+                      title="edit"
+                      id={meetup.id}
+                      onClick={this.openEditModal}
+                    />
+                  </div>
                 ))
               }
             </div>
           )
         }
         {isLoading && <Loader />}
+        {editable && (
+          <EditForm
+            closeEditModal={this.closeEditModal}
+            singleMeetup={singleMeetup}
+            getAllMeetups={this.getAllMeetups}
+            updateMeetup={this.editMeetup}
+          />
+        )}
+        <Confirm
+          open={showDeleteModal}
+          header="Are you sure you want to delete this meetup?"
+          onCancel={this.showDeleteModal}
+          onConfirm={this.deleteMeetup}
+          confirmButton="Delete Meetup"
+        />
       </div>
     );
   }
@@ -213,7 +294,10 @@ class Admin extends Component {
 Admin.propTypes = {
   getCurrentUser: propTypes.func.isRequired,
   getAllMeetups: propTypes.func.isRequired,
+  updateMeetup: propTypes.func.isRequired,
+  getSingleMeetup: propTypes.func.isRequired,
   createMeetup: propTypes.func.isRequired,
+  deleteMeetup: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
   meetups: propTypes.objectOf(propTypes.shape).isRequired,
   admin: propTypes.objectOf(propTypes.shape).isRequired,
@@ -226,4 +310,7 @@ export default connect(mapStateToProps, {
   getAllMeetups,
   createMeetup,
   clearError,
+  getSingleMeetup,
+  updateMeetup,
+  deleteMeetup,
 })(Admin);
