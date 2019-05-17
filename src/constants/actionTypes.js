@@ -55,6 +55,10 @@ const actionType = {
   // post meetups by admin
   POST_MEETUP_SUCCESS: 'POST_MEETUP_SUCCESS',
   POST_MEETUP_ERROR: 'POST_MEETUP_ERROR',
+
+  // DELETE meetups by admin
+  DELETE_MEETUP_SUCCESS: 'DELETE_MEETUP_SUCCESS',
+  DELETE_MEETUP_ERROR: 'DELETE_MEETUP_ERROR',
 };
 
 export default actionType;

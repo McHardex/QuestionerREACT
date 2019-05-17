@@ -335,6 +335,14 @@ span.tag-wrapper.ReactTags__tag {
   grid-row-gap: 5px;
 }
 
+button.ui.primary.button {
+  background: red;
+}
+
+button.ui.primary.button:hover {
+  background: #ff0000a9;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   #meetups {
     grid-template-columns: repeat(1, minmax(0, 1fr));

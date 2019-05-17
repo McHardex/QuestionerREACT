@@ -11,14 +11,15 @@ const createMeetupError = error => ({
   error,
 });
 
-// const getMeetupSuccess = () => ({
-//   type: actionTypes.FETCH_MEETUP_SUCCESS,
-// });
+const deleteMeetupSuccess = message => ({
+  type: actionTypes.DELETE_MEETUP_SUCCESS,
+  message,
+});
 
-// const getMeetupError = error => ({
-//   type: actionTypes.FETCH_MEETUP_ERROR,
-//   error,
-// });
+const deleteMeetupError = error => ({
+  type: actionTypes.DELETE_MEETUP_ERROR,
+  error,
+});
 
 export const clearError = () => ({
   type: actionTypes.CLEAR_ERROR,
@@ -48,6 +49,20 @@ export const updateMeetup = (id, data, succesCallBack) => ((dispatch) => {
       })
       .catch((err) => {
         dispatch(createMeetupError(err.response.data.error));
+      })
+  );
+});
+
+export const deleteMeetup = (id, succesCallBack) => ((dispatch) => {
+  dispatch(contentLoading());
+  return (
+    http.delete(`/meetups/${id}`)
+      .then(() => {
+        dispatch(deleteMeetupSuccess('Successfully deleted this meetup!!!'));
+        succesCallBack();
+      })
+      .catch((err) => {
+        dispatch(deleteMeetupError(err.response.data.error));
       })
   );
 });

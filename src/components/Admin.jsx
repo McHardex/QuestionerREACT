@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WithContext as ReactTags } from 'react-tag-input';
 import propTypes from 'prop-types';
+import { Confirm } from 'semantic-ui-react';
 import Header from './Header';
 import Label from './Label';
 import { getCurrentUser, getAllMeetups } from '../actions/meetupActions';
 import { getSingleMeetup } from '../actions/meetupDetailsActions';
-import { createMeetup, clearError, updateMeetup } from '../actions/adminActions';
+import {
+  createMeetup, clearError, updateMeetup, deleteMeetup,
+} from '../actions/adminActions';
 import DisplayMessage from './DisplayMessage';
 import Loader from './Loader';
 import EditForm from './EditForm';
@@ -23,10 +26,12 @@ class Admin extends Component {
       meetup: null,
       tags: [],
       editable: false,
+      showDeleteModal: false,
+      deleteId: null,
     };
   }
 
-  handleDelete = (i) => {
+  handleTagDelete = (i) => {
     const { tags } = this.state;
     this.setState({
       tags: tags.filter((tag, index) => index !== i),
@@ -95,11 +100,6 @@ class Admin extends Component {
     });
   }
 
-  clearError = () => {
-    const { clearError } = this.props;
-    clearError();
-  }
-
   openEditModal = async (e) => {
     e.preventDefault();
     const { getSingleMeetup } = this.props;
@@ -110,6 +110,28 @@ class Admin extends Component {
 
   closeEditModal = () => {
     this.setState({ editable: false });
+  }
+
+  deleteMeetup = () => {
+    const { deleteId } = this.state;
+    const { deleteMeetup } = this.props;
+    deleteMeetup(deleteId, () => {
+      getAllMeetups();
+      this.setState({ showDeleteModal: false });
+    });
+  }
+
+  showDeleteModal = (e) => {
+    const { showDeleteModal } = this.state;
+    this.setState({
+      showDeleteModal: !showDeleteModal,
+      deleteId: e.target.id,
+    });
+  }
+
+  clearError = () => {
+    const { clearError } = this.props;
+    clearError();
   }
 
   componentDidMount = () => {
@@ -129,16 +151,25 @@ class Admin extends Component {
   render() {
     const { meetups, admin } = this.props;
     const { user, meetup: singleMeetup } = meetups;
-    const { message, postMeetupError, isLoading } = admin;
+    const {
+      message, postMeetupError, isLoading, deleteMeetupSuccess,
+    } = admin;
     const { isAdmin, username } = user;
     const {
-      meetup, length, searchValue, tags, editable,
+      meetup, length, searchValue, tags, editable, showDeleteModal,
     } = this.state;
+
 
     return (
       <div className="admin-cont">
         <DisplayMessage
           error={postMeetupError}
+          message={message}
+          onClick={this.clearError}
+        />
+        <DisplayMessage
+          successClass="success-disp-msg"
+          error={deleteMeetupSuccess}
           message={message}
           onClick={this.clearError}
         />
@@ -163,7 +194,7 @@ class Admin extends Component {
                 <ReactTags
                   tags={tags}
                   labelField="text"
-                  handleDelete={this.handleDelete}
+                  handleDelete={this.handleTagDelete}
                   handleAddition={this.handleAddition}
                   handleDrag={this.handleDrag}
                   maxLength={12}
@@ -223,6 +254,7 @@ class Admin extends Component {
                       role="presentation"
                       className="fas fa-trash"
                       title="delete"
+                      onClick={this.showDeleteModal}
                       id={meetup.id}
                     />
                     <i
@@ -240,13 +272,20 @@ class Admin extends Component {
         }
         {isLoading && <Loader />}
         {editable && (
-        <EditForm
-          closeEditModal={this.closeEditModal}
-          singleMeetup={singleMeetup}
-          getAllMeetups={this.getAllMeetups}
-          updateMeetup={this.editMeetup}
-        />
+          <EditForm
+            closeEditModal={this.closeEditModal}
+            singleMeetup={singleMeetup}
+            getAllMeetups={this.getAllMeetups}
+            updateMeetup={this.editMeetup}
+          />
         )}
+        <Confirm
+          open={showDeleteModal}
+          header="Are you sure you want to delete this meetup?"
+          onCancel={this.showDeleteModal}
+          onConfirm={this.deleteMeetup}
+          confirmButton="Delete Meetup"
+        />
       </div>
     );
   }
@@ -258,6 +297,7 @@ Admin.propTypes = {
   updateMeetup: propTypes.func.isRequired,
   getSingleMeetup: propTypes.func.isRequired,
   createMeetup: propTypes.func.isRequired,
+  deleteMeetup: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
   meetups: propTypes.objectOf(propTypes.shape).isRequired,
   admin: propTypes.objectOf(propTypes.shape).isRequired,
@@ -272,4 +312,5 @@ export default connect(mapStateToProps, {
   clearError,
   getSingleMeetup,
   updateMeetup,
+  deleteMeetup,
 })(Admin);
