@@ -9,7 +9,7 @@ p.not-found {
 }
 
 .create-meetup-bk {
-  background-image: url(../images/meetup.jpg);
+  background-image: url(https://res.cloudinary.com/mchardex/image/upload/v1558174712/meetup.jpg);
   background-position: center;
   background-size: cover;
   width: 100%;
@@ -55,7 +55,7 @@ form.search-bar {
   box-sizing: border-box;
   appearance: none;
   transition: all .3s ease;
-  background-image: url(../images/search.png);
+  background-image: url(https://res.cloudinary.com/mchardex/image/upload/v1558174711/search.png);
   transition: 0.2s ease-in-out;
 }
 
@@ -79,7 +79,6 @@ form.search-bar {
   border-radius: 5px;
   border: 2px solid #353535d9;
   box-shadow: 0 0 22px #eeeeee45;
-  cursor: pointer;
   position: relative;
 }
 

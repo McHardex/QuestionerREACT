@@ -128,8 +128,8 @@ export const upvoteAndDownvoteQuestion = (questionId, successCallback) => ((disp
         dispatch(likeSuccess(res.data.data[0].votes));
         successCallback();
       })
-      .catch((err) => {
-        throw new Error(err.response.data.error);
+      .catch(() => {
+        dispatch(likeSuccess());
       })
   );
 });

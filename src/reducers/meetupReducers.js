@@ -9,15 +9,10 @@ const initialState = {
   rsvpPostSuccess: false,
   rsvpPostError: false,
   postQuestionError: false,
-  isLoading: false,
 };
 
 const meetups = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.CONTENT_LOADING:
-      return {
-        ...state, isLoading: true,
-      };
     case actionType.CLEAR_ERROR:
       return {
         ...state,
@@ -27,37 +22,36 @@ const meetups = (state = initialState, action) => {
       };
     case actionType.FETCH_USER_SUCCESS:
       return {
-        ...state, user: action.user, isLoading: false,
+        ...state, user: action.user,
       };
     case actionType.FETCH_USER_ERROR:
       return {
-        ...state, isLoading: false,
+        ...state,
       };
     case actionType.FETCH_MEETUPS_SUCCESS:
       return {
-        ...state, meetups: action.meetups, isLoading: false,
+        ...state, meetups: action.meetups,
       };
     case actionType.FETCH_MEETUPS_ERROR:
       return {
-        ...state, isLoading: false,
+        ...state,
       };
     case actionType.SINGLE_MEETUP_SUCCESS:
       return {
-        ...state, meetup: action.meetup, isLoading: false,
+        ...state, meetup: action.meetup,
       };
     case actionType.SINGLE_MEETUP_ERROR:
       return {
-        ...state, isLoading: false,
+        ...state,
       };
     case actionType.RSVP_GET_SUCCESS:
       return {
-        ...state, isLoading: false, getRsvpMessage: action.rsvp,
+        ...state, getRsvpMessage: action.rsvp,
       };
     case actionType.RSVP_POST_SUCCESS:
       return {
         ...state,
         rsvpPostSuccess: true,
-        isLoading: false,
         rsvpPostError: false,
         message: action.message,
       };
@@ -65,26 +59,23 @@ const meetups = (state = initialState, action) => {
       return {
         ...state,
         rsvpPostError: true,
-        isLoading: false,
         rsvpPostSuccess: false,
         message: action.error,
       };
     case actionType.POST_QUESTION_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         postQuestionError: false,
       };
     case actionType.POST_QUESTION_ERROR:
       return {
         ...state,
-        isLoading: false,
         postQuestionError: true,
         message: action.error,
       };
     case actionType.UPVOTE_DOWNVOTE_SUCCESS:
       return {
-        ...state, upvoteDownvoteSuccess: action.upvote, isLoading: false,
+        ...state,
       };
     default:
       return state;

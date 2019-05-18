@@ -5,7 +5,6 @@ import propTypes from 'prop-types';
 import { loginUser } from '../actions/authActions';
 import { clearError } from '../actions/action.helpers';
 import '../assets/stylesheets/login.css';
-import logo from '../assets/images/logo.png';
 import Loader from './Loader';
 import DisplayMessage from './DisplayMessage';
 
@@ -32,16 +31,17 @@ class Login extends Component {
   }
 
   render() {
-    const { auth } = this.props;
+    const { auth, loading } = this.props;
+    const { loader } = loading;
     const {
-      loginError, isLoading, errorMessage,
+      loginError, errorMessage,
     } = auth;
     return (
       <div className="login-cont">
         <div className="col1">
           <div className="col1-cont">
             <div className="logo-icon">
-              <Link to="/"><img src={logo} alt="questioner-logo" /></Link>
+              <Link to="/"><img src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/logo.png" alt="questioner-logo" /></Link>
               <span>QUESTIONER</span>
             </div>
             <form className="login-form" id="login-form" onSubmit={this.login}>
@@ -76,7 +76,7 @@ class Login extends Component {
           message={errorMessage}
           onClick={this.clearError}
         />
-        {isLoading && <Loader />}
+        {loader && <Loader />}
       </div>
     );
   }
@@ -85,10 +85,13 @@ class Login extends Component {
 Login.propTypes = {
   auth: propTypes.shape({
   }).isRequired,
+  loading: propTypes.shape({
+    loader: propTypes.bool,
+  }).isRequired,
   loginUser: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
 };
 
-const mapStateToProps = auth => auth;
+const mapStateToProps = ({ auth, loading }) => ({ auth, loading });
 
 export default connect(mapStateToProps, { loginUser, clearError })(Login);

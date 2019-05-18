@@ -104,7 +104,7 @@ i.fas.fa-user-cog {
 }
 
 .create-meetup-bk {
-  background-image: url(../images/meetup.jpg);
+  background-image: url(https://res.cloudinary.com/mchardex/image/upload/v1558174712/meetup.jpg);
   background-position: center;
   background-size: cover;
   width: 100%;
@@ -144,7 +144,7 @@ form.search-bar {
   box-sizing: border-box;
   appearance: none;
   transition: all .3s ease;
-  background-image: url(../images/search.png);
+  background-image: url(https://res.cloudinary.com/mchardex/image/upload/v1558174711/search.png);
   transition: 0.2s ease-in-out;
 }
 
@@ -186,13 +186,20 @@ label {
   border-radius: 2px;
   font-size: 18px;
   outline: none;
-  background: #f96816;
+  background:#f05a28a6;
   color: #fff;
   font-size: 14px;
-  border: 1px solid #f96816;
+  border: 1px solid #f9681600;
   font-weight: 700;
   cursor: pointer;
   margin-top: 20px;
+  opacity: 0.8;
+  font-size: 20px;
+}
+
+.submit-form:hover {
+  opacity: 1;
+  transition: 0.5s;
 }
 
 .update-form {
