@@ -7,7 +7,6 @@ import { signUpUser } from '../actions/authActions';
 import { clearError } from '../actions/action.helpers';
 import '../assets/stylesheets/signup.css';
 import Label from './Label.jsx';
-import logo from '../assets/images/logo.png';
 import Loader from './Loader';
 import DisplayMessage from './DisplayMessage';
 
@@ -37,16 +36,17 @@ class Signup extends Component {
   }
 
   render() {
-    const { auth } = this.props;
+    const { auth, loading } = this.props;
+    const { loader } = loading;
     const { errorMessage, signupError, signupSuccess } = auth;
     return (
       <div>
-        {auth.isLoading && <Loader />}
+        {loader && <Loader />}
         <header>
           <div className="header-cont">
             <div className="nav1">
               <div className="questioner-logo">
-                <img src={logo} alt="questioner-logo" />
+                <img src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/logo.png" alt="questioner-logo" />
                 <span>QUESTIONER</span>
               </div>
             </div>
@@ -176,9 +176,12 @@ class Signup extends Component {
 Signup.propTypes = {
   auth: propTypes.shape({
   }).isRequired,
+  loading: propTypes.shape({
+    loader: propTypes.bool,
+  }).isRequired,
   signUpUser: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
 };
 
-const mapStateToProps = auth => auth;
+const mapStateToProps = ({ auth, loading }) => ({ auth, loading });
 export default connect(mapStateToProps, { signUpUser, clearError })(Signup);

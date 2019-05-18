@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
 import '../assets/stylesheets/landingPage.css';
 
 const LandingPage = () => (
@@ -9,7 +8,7 @@ const LandingPage = () => (
       <div className="header-cont">
         <div className="nav1">
           <div className="questioner-logo">
-            <img src={logo} alt="questioner-logo" />
+            <img src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/logo.png" alt="questioner-logo" />
             <span>QUESTIONER</span>
           </div>
         </div>
@@ -52,9 +51,9 @@ const LandingPage = () => (
       <h2 className="how">How Questioner Works</h2>
       <div className="wrap">
         <div className="find">
-          {/* <div className="search-icon">
+          <div className="search-icon">
             <i className="fas fa-search" />
-          </div> */}
+          </div>
           <div className="details">
             <h2>Find a Meetup</h2>
             <p>Discover local meetups for all the things you love</p>
@@ -62,9 +61,9 @@ const LandingPage = () => (
           </div>
         </div>
         <div className="ask">
-          {/* <div className="add-icon">
+          <div className="add-icon">
             <i className="fas fa-plus" />
-          </div> */}
+          </div>
           <div className="details">
             <h2>Find out More</h2>
             <p>Ask questions and stay updated with your favorite meetup</p>

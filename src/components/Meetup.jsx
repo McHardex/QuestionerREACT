@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Header from './Header';
 import Loader from './Loader';
-import { getAllMeetups, getCurrentUser } from '../actions/meetupActions';
+import { getAllMeetups } from '../actions/meetupActions';
 import '../assets/stylesheets/meetup.css';
 
 class Meetup extends Component {
@@ -19,9 +19,8 @@ class Meetup extends Component {
   }
 
   componentDidMount = () => {
-    const { getAllMeetups, getCurrentUser } = this.props;
+    const { getAllMeetups } = this.props;
     getAllMeetups();
-    getCurrentUser();
   }
 
   onChange = (e) => {
@@ -49,21 +48,14 @@ class Meetup extends Component {
 
 
   render() {
-    const { meetups } = this.props;
-    const { contentLoading, user } = meetups;
-    const { isAdmin, username } = user;
+    const { loading } = this.props;
+    const { loader } = loading;
     const { meetup, length, searchValue } = this.state;
 
-    const token = JSON.parse(localStorage.getItem('token'));
-    if (!token) {
-      return (
-        <Redirect to="/login" />
-      );
-    }
     return (
       <div className="admin-cont">
-        {contentLoading && <Loader />}
-        <Header role={isAdmin} username={username} />
+        {loader && <Loader />}
+        <Header />
         <div className="cont">
           <div className="create-meetup-bk">
             <div className="banner-text">
@@ -130,12 +122,14 @@ class Meetup extends Component {
 
 Meetup.propTypes = {
   meetups: propTypes.shape({
-    contentLoading: propTypes.bool,
     meetups: propTypes.arrayOf(propTypes.shape),
   }).isRequired,
+  loading: propTypes.shape({
+    loader: propTypes.bool,
+  }).isRequired,
   getAllMeetups: propTypes.func.isRequired,
-  getCurrentUser: propTypes.func.isRequired,
 };
 
-const mapStateToProps = meetups => meetups;
-export default connect(mapStateToProps, { getAllMeetups, getCurrentUser })(Meetup);
+const mapStateToProps = ({ meetups, loading }) => ({ meetups, loading });
+
+export default connect(mapStateToProps, { getAllMeetups })(Meetup);

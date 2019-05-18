@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from './Header';
 import QuestionsAndComments from './QuestionsAndComments';
-import { getCurrentUser } from '../actions/meetupActions';
 import { clearError } from '../actions/action.helpers';
 import DisplayMessage from './DisplayMessage';
 import {
@@ -73,7 +72,9 @@ class MeetupDetails extends Component {
   }
 
   // upvote and downvote a question
-  upvoteQuestion = (questionId) => {
+  upvoteQuestion = (e) => {
+    e.preventDefault();
+    const questionId = e.target.id;
     const { id } = this.state;
     const { upvoteAndDownvoteQuestion, getSingleMeetup } = this.props;
     upvoteAndDownvoteQuestion(questionId, () => {
@@ -92,14 +93,13 @@ class MeetupDetails extends Component {
 
   componentDidMount = () => {
     const {
-      match, getSingleMeetup, getRsvp, getCurrentUser,
+      match, getSingleMeetup, getRsvp,
     } = this.props;
 
     const { id } = match.params;
 
     getRsvp(id);
     getSingleMeetup(id);
-    getCurrentUser();
     this.setState({ id });
   }
 
@@ -115,8 +115,8 @@ class MeetupDetails extends Component {
 
   render() {
     const { meetups } = this.props;
+    const { meetup } = meetups;
     const {
-      user,
       rsvpPostSuccess,
       rsvpPostError,
       message,
@@ -125,23 +125,20 @@ class MeetupDetails extends Component {
       postQuestionError,
     } = meetups;
 
-    const { isAdmin, username } = user;
-
-    const meetup = meetups.meetup[0];
 
     const { id } = this.state;
 
     return (
       <div className="m-details-cont">
         {isLoading && <Loader />}
-        <Header role={isAdmin} username={username} />
+        <Header />
         <div className="m-cont">
           <div className="m-image" />
           <div className="m-text">
-            <h1 id="spe-topic">{meetup && meetup.topic}</h1>
+            <h1 id="spe-topic">{meetup[0] && meetup[0].topic}</h1>
             <div className="mdlocation">
               <i className="fas fa-map-marker-alt" />
-              <p id="spe-location">{meetup && meetup.location}</p>
+              <p id="spe-location">{meetup[0] && meetup[0].location}</p>
             </div>
             <div className="mdrsvp">
               <i className="fas fa-users" />
@@ -151,7 +148,7 @@ class MeetupDetails extends Component {
             </div>
             <div className="mddate">
               <i className="fas fa-calendar-week" />
-              <p id="spe-happeningOn">{new Date(meetup && meetup.happeningon).toDateString()}</p>
+              <p id="spe-happeningOn">{new Date(meetup[0] && meetup[0].happeningon).toDateString()}</p>
             </div>
           </div>
         </div>
@@ -193,7 +190,6 @@ class MeetupDetails extends Component {
           <button type="submit" className="submit-ques">Send your question</button>
         </form>
         <hr />
-        <p className="dicussions">Discussions</p>
         <QuestionsAndComments
           data={meetups.meetup}
           meetupID={id}
@@ -219,7 +215,6 @@ MeetupDetails.propTypes = {
   postQuestions: propTypes.func.isRequired,
   upvoteAndDownvoteQuestion: propTypes.func.isRequired,
   postComments: propTypes.func.isRequired,
-  getCurrentUser: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
   match: propTypes.shape(propTypes.objectOf).isRequired,
 };
@@ -233,6 +228,5 @@ export default connect(mapStateToProps, {
   postQuestions,
   upvoteAndDownvoteQuestion,
   postComments,
-  getCurrentUser,
   clearError,
 })(MeetupDetails);

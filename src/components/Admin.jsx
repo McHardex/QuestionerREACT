@@ -7,7 +7,7 @@ import propTypes from 'prop-types';
 import { Confirm } from 'semantic-ui-react';
 import Header from './Header';
 import Label from './Label';
-import { getCurrentUser, getAllMeetups } from '../actions/meetupActions';
+import { getAllMeetups } from '../actions/meetupActions';
 import { getSingleMeetup } from '../actions/meetupDetailsActions';
 import {
   createMeetup, clearError, updateMeetup, deleteMeetup,
@@ -135,10 +135,7 @@ class Admin extends Component {
   }
 
   componentDidMount = () => {
-    const {
-      getCurrentUser, getAllMeetups,
-    } = this.props;
-    getCurrentUser();
+    const { getAllMeetups } = this.props;
     getAllMeetups();
   }
 
@@ -150,11 +147,10 @@ class Admin extends Component {
 
   render() {
     const { meetups, admin } = this.props;
-    const { user, meetup: singleMeetup } = meetups;
+    const { meetup: singleMeetup } = meetups;
     const {
       message, postMeetupError, isLoading, deleteMeetupSuccess,
     } = admin;
-    const { isAdmin, username } = user;
     const {
       meetup, length, searchValue, tags, editable, showDeleteModal,
     } = this.state;
@@ -173,7 +169,7 @@ class Admin extends Component {
           message={message}
           onClick={this.clearError}
         />
-        <Header role={isAdmin} username={username} />
+        <Header />
         <div className="cont">
           <div className="create-meetup-bk">
             <div className="banner-text">
@@ -292,7 +288,6 @@ class Admin extends Component {
 }
 
 Admin.propTypes = {
-  getCurrentUser: propTypes.func.isRequired,
   getAllMeetups: propTypes.func.isRequired,
   updateMeetup: propTypes.func.isRequired,
   getSingleMeetup: propTypes.func.isRequired,
@@ -306,7 +301,6 @@ Admin.propTypes = {
 const mapStateToProps = ({ admin, meetups }) => ({ admin, meetups });
 
 export default connect(mapStateToProps, {
-  getCurrentUser,
   getAllMeetups,
   createMeetup,
   clearError,

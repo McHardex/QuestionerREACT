@@ -28,13 +28,11 @@ class Profile extends Component {
     const { meetups, profile } = this.props;
     const { user } = meetups;
     const { upcomingMeetups } = profile;
-    const {
-      isAdmin, username, firstname, email, lastname,
-    } = user;
+    const { firstname, email, lastname } = user;
 
     return (
       <div className="admin-cont">
-        <Header role={isAdmin} username={username} />
+        <Header />
         <div className="profile-wrapper">
           <table>
             <tbody>

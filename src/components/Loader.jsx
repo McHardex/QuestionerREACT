@@ -1,7 +1,15 @@
 import React from 'react';
-import loader from '../assets/images/loader.gif';
 import '../assets/stylesheets/loader.css';
 
-const Loader = () => <div id="loader"><img src={loader} alt="loader" /></div>;
+const Loader = () => (
+  <div
+    id="loader"
+  >
+    <img
+      src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/loader.gif"
+      alt="loader"
+    />
+  </div>
+);
 
 export default Loader;
