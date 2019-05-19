@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Header from './Header';
 import Loader from './Loader';
 import { getAllMeetups } from '../actions/meetupActions';
 import '../assets/stylesheets/meetup.css';
 
-class Meetup extends Component {
+export class Meetup extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +24,6 @@ class Meetup extends Component {
   }
 
   onChange = (e) => {
-    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     const searchContent = e.target.value.toLowerCase();
     const { meetups } = this.props;
     const searchResult = meetups.meetups.filter(meetup => (

@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/McHardex/QuestionerREACT.svg?branch=develop)](https://travis-ci.org/McHardex/QuestionerREACT)
-[![Coverage Status](https://coveralls.io/repos/github/McHardex/QuestionerREACT/badge.svg?branch=develop)](https://coveralls.io/github/McHardex/QuestionerREACT?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/McHardex/QuestionerREACT/badge.svg)](https://coveralls.io/github/McHardex/QuestionerREACT?branch=develop)
 
 # QuestionerREACT
 

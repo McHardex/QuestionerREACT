@@ -12,7 +12,7 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 const store = mockStore({});
 
-describe.only('login actions', () => {
+describe('login actions', () => {
   it('snapshot', () => {
     const wrapper = shallow(
       <Provider store={store}>

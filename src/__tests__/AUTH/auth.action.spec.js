@@ -2,10 +2,6 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import {
-  signUpSuccess,
-  signUpError,
-  loginSuccess,
-  loginError,
   signUpUser,
   loginUser,
 } from '../../actions/authActions';
