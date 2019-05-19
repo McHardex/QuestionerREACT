@@ -7,7 +7,7 @@ import { getQuestionsCount, getCommentsCount, getUpcomingMeetups } from '../acti
 import Header from './Header';
 import '../assets/stylesheets/profile.css';
 
-class Profile extends Component {
+export class Profile extends Component {
   componentDidMount = async () => {
     const {
       getCurrentUser,
