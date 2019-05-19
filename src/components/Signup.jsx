@@ -173,14 +173,21 @@ export class Signup extends Component {
   }
 }
 
+Signup.defaultProps = {
+  auth: {},
+  loading: {},
+  signUpUser: propTypes.func,
+  clearError: propTypes.func,
+};
+
 Signup.propTypes = {
   auth: propTypes.shape({
-  }).isRequired,
+  }),
   loading: propTypes.shape({
     loader: propTypes.bool,
-  }).isRequired,
-  signUpUser: propTypes.func.isRequired,
-  clearError: propTypes.func.isRequired,
+  }),
+  signUpUser: propTypes.func,
+  clearError: propTypes.func,
 };
 
 const mapStateToProps = ({ auth, loading }) => ({ auth, loading });
