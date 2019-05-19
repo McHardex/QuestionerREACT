@@ -5,7 +5,7 @@ import {
 import { Provider } from 'react-redux';
 import store from '../store/store';
 import LandingPage from './LandingPage';
-import Signup from './Signup';
+import { Signup } from './Signup';
 import Login from './Login';
 import Admin from './Admin';
 import Meetup from './Meetup';

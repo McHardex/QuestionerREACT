@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { getCurrentUser } from '../actions/meetupActions';
+import decodeToken from '../utils/decodeToken';
 import '../assets/stylesheets/landingPage.css';
 import Logout from './Logout';
 
@@ -11,6 +12,15 @@ class Header extends Component {
   componentDidMount = () => {
     const { getCurrentUser } = this.props;
     getCurrentUser();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location = '/login';
+    } else {
+      const decoded = decodeToken(token);
+      if (decoded.exp > new Date().getTime()) {
+        window.location = '/login';
+      }
+    }
   }
 
   render() {

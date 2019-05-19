@@ -67,7 +67,7 @@ class Login extends Component {
         <div className="col2">
           <h1>
             Lets create the future
-            <strong>together</strong>
+            <strong> together</strong>
           </h1>
           <Link to="/signup" className="getstarted">Get started today</Link>
         </div>
