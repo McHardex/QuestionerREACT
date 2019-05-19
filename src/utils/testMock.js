@@ -36,6 +36,21 @@ const mock = {
     email: 'bukunm@gmail.com',
     password: 'password',
   },
+  singleMeetupProps: {
+    meetups: {
+      meetup: [
+        { location: 'title', topic: 'not again', tags: ['name', 'any'] },
+        { location: 'today', topic: 'when again', tags: ['name', 'any'] }],
+    },
+    postQuestions: jest.fn(),
+    getSingleMeetup: jest.fn(),
+    getRsvp: jest.fn(),
+    postRsvp: jest.fn(),
+    upvoteAndDownvoteQuestion: jest.fn(),
+    postComments: jest.fn(),
+    clearError: jest.fn(),
+    match: { params: { id: 1 } },
+  },
 };
 
 export default mock;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
-class QuestionsAndComments extends Component {
+export class QuestionsAndComments extends Component {
   postComment = (e) => {
     e.preventDefault();
     const questionId = parseInt(e.target.id, 10);
