@@ -10,16 +10,27 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: 'babel-loader' },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      { exclude: /node_modules/ },
       {
-        test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name]-[hash:8].[ext]',
+              name: 'images/[hash]-[name].[ext]',
             },
           },
         ],

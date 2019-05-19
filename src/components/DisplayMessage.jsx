@@ -22,10 +22,11 @@ const DisplayMessage = ({
 DisplayMessage.defaultProps = {
   successClass: '',
   message: null,
+  error: false,
 };
 
 DisplayMessage.propTypes = {
-  error: propTypes.bool.isRequired,
+  error: propTypes.bool,
   message: propTypes.string,
   onClick: propTypes.func.isRequired,
   successClass: propTypes.string,

@@ -10,7 +10,7 @@ import Label from './Label.jsx';
 import Loader from './Loader';
 import DisplayMessage from './DisplayMessage';
 
-class Signup extends Component {
+export class Signup extends Component {
   resetForm = (target) => {
     target.reset();
   }

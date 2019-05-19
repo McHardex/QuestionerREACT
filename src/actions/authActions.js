@@ -2,20 +2,20 @@ import actionTypes from '../constants/actionTypes';
 import http from '../utils/http';
 import { contentLoading } from './action.helpers';
 
-const signUpSuccess = () => ({
+export const signUpSuccess = () => ({
   type: actionTypes.SIGNUP_SUCCESS,
 });
 
-const signUpError = error => ({
+export const signUpError = error => ({
   type: actionTypes.SIGNUP_ERROR,
   error,
 });
 
-const loginSuccess = () => ({
+export const loginSuccess = () => ({
   type: actionTypes.LOGIN_SUCCESS,
 });
 
-const loginError = error => ({
+export const loginError = error => ({
   type: actionTypes.LOGIN_ERROR,
   error,
 });
@@ -28,8 +28,8 @@ export const signUpUser = (data, succesCallBack) => ((dispatch) => {
         dispatch(signUpSuccess(res));
         succesCallBack();
       })
-      .catch((res) => {
-        dispatch(signUpError(res.response.data.error));
+      .catch((err) => {
+        dispatch(signUpError(err.response.data.error));
       })
   );
 });
