@@ -15,7 +15,7 @@ import {
 import '../assets/stylesheets/meetupDetails.css';
 import Loader from './Loader';
 
-class MeetupDetails extends Component {
+export class MeetupDetails extends Component {
   constructor(props) {
     super(props);
 
