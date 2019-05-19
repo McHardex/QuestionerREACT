@@ -13,6 +13,16 @@ const mock = {
     loading: { loader: true },
     auth: {},
   },
+  meetupProps: {
+    meetups: {
+      meetups: [
+        { location: 'title', topic: 'not again', tags: ['name', 'any'] },
+        { location: 'today', topic: 'when again', tags: ['name', 'any'] }],
+    },
+    getAllMeetups: jest.fn(),
+    loading: { loader: true },
+    value: 'bukunmi',
+  },
   signupPayload: {
     firstname: 'Adesi',
     lastname: 'bukui',
