@@ -51,6 +51,20 @@ const mock = {
     clearError: jest.fn(),
     match: { params: { id: 1 } },
   },
+  profileProps: {
+    getCurrentUser: jest.fn(),
+    getQuestionsCount: jest.fn(),
+    getCommentsCount: jest.fn(),
+    getUpcomingMeetups: jest.fn(),
+    meetups: {
+      user: {
+        firstname: 'adenisi',
+        lastname: 'bukunmi',
+        email: 'test@gmail.com',
+      },
+    },
+    profile: { name: 'bukunmi' },
+  },
 };
 
 export default mock;
