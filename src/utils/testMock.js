@@ -23,8 +23,8 @@ const mock = {
     password: '12jj678',
   },
   login: {
-    email: 'dokosd@gmail.com',
-    password: '123450jj678',
+    email: 'bukunm@gmail.com',
+    password: 'password',
   },
 };
 
