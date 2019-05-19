@@ -28,8 +28,8 @@ export const signUpUser = (data, succesCallBack) => ((dispatch) => {
         dispatch(signUpSuccess(res));
         succesCallBack();
       })
-      .catch((res) => {
-        dispatch(signUpError(res.response.data.error));
+      .catch((err) => {
+        dispatch(signUpError(err.response.data.error));
       })
   );
 });
