@@ -9,7 +9,7 @@ import Loader from './Loader';
 import DisplayMessage from './DisplayMessage';
 
 
-class Login extends Component {
+export class Login extends Component {
   login = (e) => {
     e.preventDefault();
     const data = {};
