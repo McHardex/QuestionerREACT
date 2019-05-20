@@ -16,7 +16,7 @@ import DisplayMessage from './DisplayMessage';
 import Loader from './Loader';
 import EditForm from './EditForm';
 
-class Admin extends Component {
+export class Admin extends Component {
   constructor(props) {
     super(props);
 

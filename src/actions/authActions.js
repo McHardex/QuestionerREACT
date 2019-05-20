@@ -45,6 +45,7 @@ export const loginUser = data => ((dispatch) => {
         window.location = './meetups';
       })
       .catch((err) => {
+        console.log(err, '------');
         dispatch(loginError(err.response.data.error));
       })
   );

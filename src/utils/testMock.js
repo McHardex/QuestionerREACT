@@ -65,6 +65,20 @@ const mock = {
     },
     profile: { name: 'bukunmi' },
   },
+  adminProps: {
+    getAllMeetups: jest.fn(),
+    updateMeetup: jest.fn(),
+    getSingleMeetup: jest.fn(),
+    createMeetup: jest.fn(),
+    deleteMeetup: jest.fn(),
+    clearError: jest.fn(),
+    meetups: {
+      meetups: [
+        { location: 'title', topic: 'not again', tags: ['name', 'any'] },
+        { location: 'today', topic: 'when again', tags: ['name', 'any'] }],
+    },
+    admin: {},
+  },
 };
 
 export default mock;
