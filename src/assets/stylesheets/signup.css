@@ -1,8 +1,6 @@
-body {
-  margin: 0;
-  height: 100vh;
-  background: #222;
-  color: #fff;
+.signup-cont {
+  background: #292929;
+  height: -webkit-fill-available;
 }
 
 header.signup {
@@ -30,15 +28,6 @@ header.signup {
   height: 40px;
 }
 
-.questioner-logo span {
-  color: #fff;
-  letter-spacing: 3px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-left: 10px;
-  text-shadow: 0 0 3px #fff;
-}
-
 .wrapper {
   position: relative;
   padding-top: 102px;
@@ -57,18 +46,26 @@ header.signup {
 
 .have-acc {
   padding: 0 20px;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .sign-in-link {
-  color: #f96816;
+  color: #ffffff;
+  font-weight: bolder;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
+  font-size: 15px;
+}
+
+.sign-in-link:hover {
+  color: rgb(179, 179, 179);
 }
 
 form.signup-form {
-  width: 100%;
-  margin: 40px 0;
-  height: 55vh;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .form-wrapper {
@@ -77,20 +74,21 @@ form.signup-form {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  margin-top: 60px;
 }
 
-.form1, .form2 {
+.form1 {
   display: flex;
   flex-direction: column;
-  width: 48%;
+  width: 100%;
   line-height: 2;
 }
 
-.form-input {
+.form-input-signup {
   box-shadow: none;
   border: none;
   color: #f2f2f2;
-  background-color: #363636;
+  background: #363636;
   font-weight: 100;
   font-size: 14px;
   line-height: 24px;
@@ -104,42 +102,31 @@ label {
   font-weight: 500;
 }
 
-.required {
-  float: right;
-  padding: 0 20px;
-  color: #ccc;
-  font-size: 12px;
-}
 
 .submit-signup-form {
-  background: linear-gradient(to right,#f05a28 0,#e80a89 100%);
+  background: #0c108c;
   border: none;
   text-decoration: none;
-  border-radius: 2px;
-  cursor: pointer;
-  float: left;
+  border-radius: 5px;
   margin: 20px;
   padding: 10px 60px;
   color: #f2f2f2;
   font-size: 15px;
-  width: 20%;
+  outline: none;
 }
 
 .submit-signup-form:hover {
-  border: 1px solid #f96816;
-  color: #f96816;
-  text-decoration: none;
-  background: transparent;
+ opacity: 0.7;
 }
 
 .error-cont {
   position: fixed;
-  top: 0;
+  top: 8vh;
   right: 0;
   left: 0;
   color: #fff;
   z-index: 99999;
-  background: #ff0000ed;
+  background: #5d0303ed;
   margin: 0;
   text-align: center;
   font-weight: 600;
@@ -202,8 +189,11 @@ label {
     flex-direction: column;
   }
 
-  .form1, .form2 {
-    width: 100%;
+  .have-acc {
+    width: 80%;
+  }
+
+  .form1 {
     line-height: 3;
   }
   
@@ -216,7 +206,8 @@ label {
     font-size: 12px;
   }
 
-  .submit-signup-form {
-    width: 45%;
+  form.signup-form {
+    width: 100%;
+    margin: 0 auto;
   }
 }

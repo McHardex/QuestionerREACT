@@ -7,7 +7,8 @@ describe('meetups reducers', () => {
       meetups: [],
       meetup: [],
       user: {},
-      message: null,
+      message: '',
+      userRsvp: '',
       getRsvpMessage: null,
       rsvpPostSuccess: false,
       rsvpPostError: false,
@@ -74,6 +75,7 @@ describe('meetups reducers', () => {
       rsvpPostSuccess: true,
       rsvpPostError: false,
       message: 'message',
+      userRsvp: '',
     });
   });
 
@@ -148,6 +150,37 @@ describe('meetups reducers', () => {
       rsvpPostSuccess: false,
       rsvpPostError: false,
       postQuestionError: false,
+    });
+  });
+
+  it('should handle.USER_RSVP_SUCCESS', () => {
+    expect(
+      meetups({}, {
+        type: actionTypes.USER_RSVP_SUCCESS,
+        userRsvp: undefined,
+      }),
+    ).toEqual({
+      userRsvp: undefined,
+    });
+  });
+
+  it('should handle.USER_RSVP_ERROR', () => {
+    expect(
+      meetups({}, {
+        type: actionTypes.USER_RSVP_ERROR,
+      }),
+    ).toEqual({});
+  });
+
+  it('should handle.RESET_COMPONENT', () => {
+    expect(
+      meetups({}, {
+        type: actionTypes.RESET_COMPONENT,
+      }),
+    ).toEqual({
+      userRsvp: '',
+      message: '',
+      meetups: [],
     });
   });
 });

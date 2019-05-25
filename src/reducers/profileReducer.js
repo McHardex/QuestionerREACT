@@ -4,6 +4,7 @@ const initialState = {
   questionCount: 0,
   commentCount: 0,
   upcomingMeetups: [],
+  updateUserError: '',
 };
 
 const profile = (state = initialState, action) => {
@@ -23,6 +24,15 @@ const profile = (state = initialState, action) => {
     case actionType.FETCH_UPCOMING_MEETUP_error:
       return {
         ...state, error: action.error,
+      };
+    case actionType.UPDATE_USER_PROFILE_SUCESS:
+      return {
+        ...state,
+      };
+    case actionType.UPDATE_USER_PROFILE_ERROR:
+      return {
+        ...state,
+        error: action.error,
       };
     default:
       return state;

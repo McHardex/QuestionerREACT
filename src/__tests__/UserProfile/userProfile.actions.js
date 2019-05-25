@@ -5,6 +5,7 @@ import {
   getQuestionsCount,
   getCommentsCount,
   getUpcomingMeetups,
+  updateProfile,
 } from '../../actions/profileActions';
 import actionTypes from '../../constants/actionTypes';
 
@@ -95,9 +96,9 @@ describe('user profile actions', () => {
     expect(store.getActions()).toEqual(expectedAction);
   });
 
-  it('should create an action on post rsvp error ', async () => {
-    fetchMock.mock(
-      '/api/v1/meetups',
+  it('should create an action on fetching upcoming meetups', async () => {
+    await fetchMock.mock(
+      '/api/v1/meetups/upcoming',
       {
         status: 200,
       },
@@ -109,7 +110,7 @@ describe('user profile actions', () => {
       },
     );
 
-    await fetch('/api/v1/meetups', {
+    await fetch('/api/v1/meetups/upcoming', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -121,15 +122,49 @@ describe('user profile actions', () => {
         type: 'CONTENT_LOADING',
       },
       {
-        type: actionTypes.FETCH_UPCOMING_MEETUP_ERROR,
-        error: 'jwt malformed',
+        type: actionTypes.FETCH_UPCOMING_MEETUP_SUCCESS,
       },
     ];
 
     const store = mockStore({});
 
-    const error = 'jwt malformed';
-    await store.dispatch(getUpcomingMeetups(error));
-    expect(store.getActions()).toEqual(expectedAction);
+    await store.dispatch(getUpcomingMeetups());
+    expect(store.getActions()).toMatchObject(expectedAction);
+  });
+
+  it('should create an action on update profile error', async () => {
+    await fetchMock.mock(
+      '/api/v1/user',
+      {
+        status: 200,
+      },
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    await fetch('/api/v1/user', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const expectedAction = [
+      {
+        type: 'CONTENT_LOADING',
+      },
+      {
+        type: actionTypes.UPDATE_USER_PROFILE_ERROR,
+      },
+    ];
+
+    const store = mockStore({});
+
+    await store.dispatch(updateProfile());
+    expect(store.getActions()).toMatchObject(expectedAction);
   });
 });

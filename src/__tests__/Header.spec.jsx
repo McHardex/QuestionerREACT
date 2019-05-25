@@ -28,10 +28,4 @@ describe('Header component', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('cdm', () => {
-    shallow(<Header {...props} />);
-    const spy = jest.spyOn(Header.prototype, 'componentDidMount');
-    expect(spy).toHaveBeenCalled();
-  });
 });

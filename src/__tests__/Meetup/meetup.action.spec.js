@@ -6,9 +6,6 @@ import {
   getCurrentUser,
 } from '../../actions/meetupActions';
 import actionTypes from '../../constants/actionTypes';
-// import mock from '../../utils/testMock';
-
-// const { signupPayload, login } = mock;
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -21,7 +18,7 @@ describe('meetup actions', () => {
     fetchMock.restore();
   });
 
-  it('should create an action on error getting meetups', async () => {
+  it('should create an action on getting meetups', async () => {
     fetchMock.mock(
       '/api/v1/auth/meetups',
       {
@@ -47,16 +44,13 @@ describe('meetup actions', () => {
         type: 'CONTENT_LOADING',
       },
       {
-        type: actionTypes.FETCH_MEETUPS_ERROR,
-        error: 'jwt malformed',
+        type: actionTypes.FETCH_MEETUPS_SUCCESS,
       },
     ];
 
     const store = mockStore({});
-
-    const error = 'jwt malformed';
-    await store.dispatch(getAllMeetups(error));
-    expect(store.getActions()).toEqual(expectedAction);
+    await store.dispatch(getAllMeetups());
+    expect(store.getActions()).toMatchObject(expectedAction);
   });
 
   it('should create an action on error getting current user success', async () => {

@@ -7,6 +7,7 @@ describe('profile reducers', () => {
       questionCount: 0,
       commentCount: 0,
       upcomingMeetups: [],
+      updateUserError: '',
     });
   });
 
@@ -47,6 +48,25 @@ describe('profile reducers', () => {
     expect(
       profile({}, {
         type: actionTypes.FETCH_UPCOMING_MEETUP_error,
+        error: 'error',
+      }),
+    ).toEqual({
+      error: 'error',
+    });
+  });
+
+  it('should handle UPDATE_USER_PROFILE_SUCESS', () => {
+    expect(
+      profile({}, {
+        type: actionTypes.UPDATE_USER_PROFILE_SUCESS,
+      }),
+    ).toEqual({});
+  });
+
+  it('should handle UPDATE_USER_PROFILE_ERROR', () => {
+    expect(
+      profile({}, {
+        type: actionTypes.UPDATE_USER_PROFILE_ERROR,
         error: 'error',
       }),
     ).toEqual({

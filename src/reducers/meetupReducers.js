@@ -4,11 +4,12 @@ const initialState = {
   meetups: [],
   meetup: [],
   user: {},
-  message: null,
+  message: '',
   getRsvpMessage: null,
   rsvpPostSuccess: false,
   rsvpPostError: false,
   postQuestionError: false,
+  userRsvp: '',
 };
 
 const meetups = (state = initialState, action) => {
@@ -54,6 +55,7 @@ const meetups = (state = initialState, action) => {
         rsvpPostSuccess: true,
         rsvpPostError: false,
         message: action.message,
+        userRsvp: '',
       };
     case actionType.RSVP_POST_ERROR:
       return {
@@ -73,9 +75,25 @@ const meetups = (state = initialState, action) => {
         postQuestionError: true,
         message: action.error,
       };
+    case actionType.USER_RSVP_SUCCESS:
+      return {
+        ...state,
+        userRsvp: action.response,
+      };
+    case actionType.USER_RSVP_ERROR:
+      return {
+        ...state,
+      };
     case actionType.UPVOTE_DOWNVOTE_SUCCESS:
       return {
         ...state,
+      };
+    case actionType.RESET_COMPONENT:
+      return {
+        ...state,
+        userRsvp: '',
+        message: '',
+        meetups: [],
       };
     default:
       return state;

@@ -24,9 +24,8 @@ const rsvpPostSuccess = message => ({
   type: actionTypes.RSVP_POST_SUCCESS,
   message,
 });
-const rsvpPostError = error => ({
+const rsvpPostError = () => ({
   type: actionTypes.RSVP_POST_ERROR,
-  error,
 });
 
 
@@ -45,6 +44,10 @@ const likeSuccess = upvote => ({
   upvote,
 });
 
+const likeFailure = () => ({
+  type: actionTypes.UPVOTE_DOWNVOTE_SUCCESS,
+});
+
 const postCommentSuccess = () => ({
   type: actionTypes.POST_COMMENT_SUCCESS,
 });
@@ -52,6 +55,15 @@ const postCommentSuccess = () => ({
 const postCommentError = error => ({
   type: actionTypes.POST_COMMENT_ERROR,
   error,
+});
+
+const userRsvpSuccess = response => ({
+  type: actionTypes.USER_RSVP_SUCCESS,
+  response,
+});
+
+const userRsvpError = () => ({
+  type: actionTypes.USER_RSVP_ERROR,
 });
 
 
@@ -68,7 +80,7 @@ export const getSingleMeetup = id => ((dispatch) => {
   );
 });
 
-// fetch all rsvps for specific meetup
+// fetch all yes rsvps for specific meetup
 export const getRsvp = meetupID => ((dispatch) => {
   dispatch(contentLoading());
   return (
@@ -89,17 +101,31 @@ export const getRsvp = meetupID => ((dispatch) => {
   );
 });
 
+// get rsvp by the user
+export const getRsvpByUser = meetupID => ((dispatch) => {
+  dispatch(contentLoading());
+  return (
+    http.get(`/user/rsvp/${meetupID}`)
+      .then((res) => {
+        dispatch(userRsvpSuccess(res.data.data[0].response));
+      })
+      .catch(() => {
+        dispatch(userRsvpError());
+      })
+  );
+});
+
 // // rsvp on a meetup
 export const postRsvp = (meetupID, data, successCallback) => ((dispatch) => {
   dispatch(contentLoading());
   return (
     http.post(`/meetups/${meetupID}/rsvps`, data)
-      .then(() => {
-        dispatch(rsvpPostSuccess('Your response has been recorded'));
+      .then((res) => {
+        dispatch(rsvpPostSuccess(res.data.message));
         successCallback();
       })
-      .catch((err) => {
-        dispatch(rsvpPostError(err.response.data.error));
+      .catch(() => {
+        dispatch(rsvpPostError());
       })
   );
 });
@@ -120,19 +146,16 @@ export const postQuestions = (data, successCallback) => ((dispatch) => {
 });
 
 // upvote and downvote a particular question
-export const upvoteAndDownvoteQuestion = (questionId, successCallback) => ((dispatch) => {
-  dispatch(contentLoading());
-  return (
-    http.patch(`questions/${questionId}/upvote`)
-      .then((res) => {
-        dispatch(likeSuccess(res.data.data[0].votes));
-        successCallback();
-      })
-      .catch(() => {
-        dispatch(likeSuccess());
-      })
-  );
-});
+export const upvoteAndDownvoteQuestion = (questionId, successCallback) => (dispatch => (
+  http.patch(`questions/${questionId}/upvote`)
+    .then((res) => {
+      dispatch(likeSuccess(res.data.data[0].votes));
+      successCallback();
+    })
+    .catch(() => {
+      dispatch(likeFailure())
+    })
+));
 
 
 // post comments on a particular question
@@ -148,4 +171,8 @@ export const postComments = (data, successCallback) => ((dispatch) => {
         dispatch(postCommentError(err));
       })
   );
+});
+
+export const resetComponent = () => ({
+  type: actionTypes.RESET_COMPONENT,
 });

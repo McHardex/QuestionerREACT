@@ -9,7 +9,7 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  background-color: #181818;
+  background-color: #ffffff;
   align-items: center;
   overflow: scroll;
 }
@@ -37,8 +37,9 @@
 }
 
 .logo-icon span {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 30px;
+  font-weight: 600;
+  color: #000;
   margin-left: 10px;
   letter-spacing: 8px;
 }
@@ -51,19 +52,23 @@
   box-sizing: border-box;
 }
 
-label {
-  color: #ccc;
-  font-weight: 600;
+.login-form label {
+  color: #000;
 }
 
 .login-input {
-  color: #ccc;
-  background-color: #181818;
-  border: 1px solid #555;
+  color: #000;
+  background-color: transparent;
+  border: 1px solid #b3b3b3;
   padding: 10px;
   border-radius: 2px;
   font-size: 18px;
   outline: none;
+}
+
+.login-input:focus {
+  border: 1px solid #1416585b;
+  box-shadow: 0 0 3px #1416585b;
 }
 
 .sign-in {
@@ -71,14 +76,17 @@ label {
   border: 1px solid #555;
   padding: 10px 0;
   border-radius: 2px;
-  font-size: 18px;
   outline: none;
-  background: #f96816;
+  background: #0c108c;
   color: #fff;
-  font-size: 14px;
-  border: 1px solid #f96816;
+  font-size: 20px;
+  border: 1px solid #f7f5f4;
   font-weight: 700;
   cursor: pointer;
+}
+
+.sign-in:hover {
+  opacity: 0.7;
 }
 
 .more-details {
@@ -97,19 +105,18 @@ label {
 }
 
 .or span {
-  color: #ccc;
+  color: #000;
   padding: 0 12px;
 }
 
 .more-details a {
   text-decoration: none;
-  color: #ffff;
-  font-size: 14px;
+  color: #0c0300;
+  font-size: 18px;
 }
 
 .more-details a:hover {
   text-decoration: underline;
-  color: #f96816;
 }
 
 .bar {
@@ -120,22 +127,18 @@ label {
 }
 
 a.sign-up {
-  border: 1px solid #fff;
   padding: 5px 0;
+  border: 1px solid #0e0501;
+  color: #000;
+  text-decoration: none;
   text-decoration: none;
   border-radius: 2px;
   margin-top: 20px;
 }
 
-a.sign-up:hover, .getstarted:hover {
-  border: 1px solid #f96816;
-  color: #f96816;
-  text-decoration: none;
-}
-
 .col2 {
   color: #fff;
-  background-image: url(https://res.cloudinary.com/mchardex/image/upload/v1558174713/loginBackgd.jpg);
+  background-image: url(https://cdn.wallpapersafari.com/79/18/TkhS4x.jpg);
   min-height: 100vh;
   width: 50%;
   background-size: cover;

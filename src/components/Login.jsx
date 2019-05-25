@@ -33,7 +33,6 @@ export class Login extends Component {
   render() {
     const { auth, loading } = this.props;
     const { loader } = loading;
-    console.log(auth, 'auth');
     const {
       loginError, errorMessage,
     } = auth;

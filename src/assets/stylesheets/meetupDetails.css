@@ -26,6 +26,12 @@
   text-transform: capitalize;
 }
 
+.rsvp-ques {
+  color: #000;
+  text-align: center;
+  margin-top: 5vh;
+}
+
 .question-title {
   text-align: center;
   font-size: 20px;
@@ -40,6 +46,8 @@
 .m-text {
   min-width: 40%;
   margin-left: 20px;
+  color: #000;
+  font-size: 20px;
 }
 
 .m-text h1 {
@@ -60,13 +68,13 @@ form#question-submit {
 }
 
 input.question-val {
-  border: 1px solid #ccc;
+  border: 1px solid #313030;
   background: transparent;
   border-radius: 5px 0 0 5px;
   padding: 20px 10px;
   width: 80%;
   font-size: 20px;
-  color: #ccc;
+  color: #212121;
   outline: none;
 }
 
@@ -74,7 +82,7 @@ button.submit-ques {
   padding: 10px;
   border: none;
   font-size: 20px;
-  background: #9d260e;
+  background: #11157b;
   color: #fff;
   font-weight: lighter;
   cursor: pointer;
@@ -82,8 +90,8 @@ button.submit-ques {
 }
 
 button.submit-ques:hover {
-  background: #eeeeee42;
-  color: #ff3a12;
+ opacity: 0.7;
+ transition: 0.5s;
 }
 
 .dicussions {
@@ -99,15 +107,21 @@ button.submit-ques:hover {
 
 .question-cont {
   padding: 20px;
-  background: #5858582e;
+  background: #f9f9f9;
   border-radius: 10px;
-  color: #fff;
-  box-shadow: 0 0 68px #232323;
+  color: #222;
+  box-shadow: 0 0 13px #232323ab;
   margin: 20px 0;
 }
 
 .question-cont h3 {
   text-transform: capitalize;
+  color: #10157b;
+}
+
+h1.disc {
+  color: #000;
+  text-align: center;
 }
 
 i.far.fa-thumbs-up {
@@ -117,7 +131,8 @@ i.far.fa-thumbs-up {
 }
 
 i.far.fa-thumbs-up:hover {
-  opacity: 1;
+  color: #0208bd;
+  transition: 0.2s;
 }
 
 .likes-dis {
@@ -125,7 +140,7 @@ i.far.fa-thumbs-up:hover {
 }
 
 .upvote span {
-  color: red;
+  color: #000;
   font-weight: 400;
   font-size: 20px;
 }
@@ -145,26 +160,29 @@ input.form-input.comment {
   background-size: 26px 26px;
   background-repeat: no-repeat;
   background-position: 5px 6px;
-  border: solid 1px #e0dada;
-  color: #fff;
-  font-size: 14px;
+  border: solid 1px #4a363685;
+  color: #100101;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 200;
+  display: flex;
+  font-weight: 400;
   padding: 10px 10px;
   outline: none;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   background-color: transparent;
   box-sizing: border-box;
   appearance: none;
+  flex-direction: column;
+  flex-grow: 2;
 }
 
 .submit-comment {
   padding: 10px 20px;
   font-size: 12px;
-  border-radius: 5px;
-  border: 1px solid #797979;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #585858;
   color: #fff;
-  background: transparent;
+  background: #12157b;
   font-weight: 700;
   cursor: pointer;
 }
@@ -179,10 +197,18 @@ input.form-input.comment {
 }
 
 .question-cont p {
-  color: #e4e2e2;
+  color: #000;
   font-size: 14px;
   background-color: #92929205;
   padding: 0;
+  font-weight: 500;
+  word-break: break-all;
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
+
+i.far.fa-comment {
+  color: #cccccc;
 }
 
 a.cte-meetup {
@@ -190,56 +216,114 @@ a.cte-meetup {
   display: none;
 }
 
-/* rsvp */
-#rsvp-submit {
-  margin: 50px auto;
-  width: 100%;
+.rsvp-resp-buttn {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
 
-input.rsvp-val {
-  padding: 15px 0;
-  width: 90%;
-  font-size: 26px;
-  color: #ccc;
-  background: #ccc0;
-  border: 1px solid #313030;
+button.yes-btn {
+  padding: 10px 30px;
+  background: #fff;
   outline: none;
-  text-align: center;
-  font-weight: 100;
-  cursor: text;
-}
-
-input.rsvp-val:hover {
-  border: 1px solid #ffffff80;
-}
-
-.rsvp-msg.error {
+  border: none;
+  border-radius: 5px;
   font-size: 18px;
-  color: #ff0707;
-  margin-top: 10px;
-  transition: 10s;
+  font-weight: 600;
+  color: #00631e;
+  cursor: pointer;
+  border: 1px solid #00631e;
+  margin-right: 15px;
 }
 
-.rsvp-msg.sucess {
+button.disable-yes-btn {
+  background: #00631e;
+  color: #fff;
+  padding: 10px 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
   font-size: 18px;
-  color: #019c30;
-  margin-top: 10px;
-  transition: 10s;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #00631e;
+  margin-right: 15px;
 }
 
-.rsvp-succ-msg {
+
+button.yes-btn:hover {
+  background: #00631e;
+  color: #fff;
+}
+
+button.no-btn {
+  padding: 10px 30px;
+  background: #fff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
   font-size: 18px;
-  color: #07ff3d;
-  margin-top: 20px;
+  font-weight: 600;
+  color: #e60000;
+  cursor: pointer;
+  border: 1px solid #e60000;
+  margin-right: 15px;
+}
+
+button.disable-no-btn {
+  padding: 10px 30px;
+  background: #e60000;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #e60000;
+  margin-right: 15px;
+}
+
+button.no-btn:hover {
+  background: #e60000;
+  color: #fff;
+}
+
+button.maybe-btn {
+  padding: 10px 30px;
+  background: #fff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #302e2e;
+  cursor: pointer;
+  border: 1px solid #302e2e;
+}
+button.disable-maybe-btn {
+  padding: 10px 30px;
+  background: #302e2e;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #302e2e;
+}
+
+button.maybe-btn:hover {
+  background: #302e2e;
+  color: #fff;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
   .m-cont {
     flex-direction: column;
+    padding: 0 20px;
+    box-shadow: 0px 0px 28px #08020245;
   }
 
   .m-image, .questions {
