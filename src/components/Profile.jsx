@@ -26,21 +26,21 @@ export class Profile extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  async componentDidMount() {
     const {
       getCurrentUser,
       getQuestionsCount,
       getCommentsCount,
       getUpcomingMeetups,
     } = this.props;
-
-    await getCurrentUser();
     const { meetups } = this.props;
     const { user } = meetups;
-    getQuestionsCount(user.id);
-    getCommentsCount(user.id);
-    getUpcomingMeetups();
-  };
+
+    await getCurrentUser();
+    await getUpcomingMeetups();
+    await getCommentsCount(user.id);
+    await getQuestionsCount(user.id);
+  }
 
   toggleModal = () => {
     const { showModal } = this.state;

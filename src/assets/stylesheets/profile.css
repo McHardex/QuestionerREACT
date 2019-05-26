@@ -1,7 +1,7 @@
 .profile-wrapper {
   display: flex;
   flex-direction: row;
-  margin: 12vh auto;
+  margin: 100px auto;
   margin-bottom: 40px;
   width: 95%;
   justify-content: space-between;

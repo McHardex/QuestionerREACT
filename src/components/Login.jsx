@@ -38,6 +38,7 @@ export class Login extends Component {
     } = auth;
     return (
       <div className="login-cont">
+        {loader && <Loader />}
         <div className="col1">
           <div className="col1-cont">
             <div className="logo-icon">
@@ -76,7 +77,6 @@ export class Login extends Component {
           message={errorMessage}
           onClick={this.clearError}
         />
-        {loader && <Loader />}
       </div>
     );
   }

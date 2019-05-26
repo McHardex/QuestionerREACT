@@ -37,8 +37,7 @@ export class Signup extends Component {
   render() {
     const { auth, loading } = this.props;
     const { loader } = loading;
-    const { errorMessage, signupError, signupSuccess } = auth;
-    if (signupSuccess) return <Redirect to="/meetups" />;
+    const { errorMessage, signupError } = auth;
     return (
       <div className="signup-cont">
         {loader && <Loader />}

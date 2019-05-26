@@ -1,5 +1,5 @@
 const initialState = {
-  loader: false,
+  loader: true,
 };
 
 const loading = (state = initialState, action) => {

@@ -6,7 +6,7 @@ const Loader = () => (
     id="loader"
   >
     <img
-      src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/loader.gif"
+      src="http://kdm-manager.com/media/loading_io.gif"
       alt="loader"
     />
   </div>
