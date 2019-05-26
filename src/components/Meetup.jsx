@@ -88,7 +88,7 @@ export class Meetup extends Component {
               <div className="meetups" id="meetups">
                 {
                   meetup && meetup.map(meetup => (
-                    <div className="meetup-wrap" key={meetup.id}>
+                    <div className="meetup-wrap-landing-page" key={meetup.id}>
                       <Link to={`/meetups/${meetup.id}`} className="link" key={meetup.id}>
                         <div
                           className="meetup-cont"
@@ -96,6 +96,9 @@ export class Meetup extends Component {
                           key={meetup.id}
                         >
                           <div className="meetup-text">
+                            <div className="meet-img">
+                              <img src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/logo.png" alt="questioner-logo" />
+                            </div>
                             <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
                             <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
                             <p className="loctn">{meetup.location}</p>

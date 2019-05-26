@@ -125,14 +125,12 @@ describe('single meetup', () => {
       },
       {
         type: actionTypes.RSVP_POST_ERROR,
-        error: 'jwt malformed',
       },
     ];
 
     const store = mockStore({});
 
-    const error = 'jwt malformed';
-    await store.dispatch(postRsvp(error));
+    await store.dispatch(postRsvp());
     expect(store.getActions()).toEqual(expectedAction);
   });
 
@@ -197,18 +195,13 @@ describe('single meetup', () => {
 
     const expectedAction = [
       {
-        type: 'CONTENT_LOADING',
-      },
-      {
         type: actionTypes.UPVOTE_DOWNVOTE_SUCCESS,
-        upvote: undefined,
       },
     ];
 
     const store = mockStore({});
 
-    const upvote = undefined;
-    await store.dispatch(upvoteAndDownvoteQuestion(upvote));
+    await store.dispatch(upvoteAndDownvoteQuestion());
     expect(store.getActions()).toEqual(expectedAction);
   });
 

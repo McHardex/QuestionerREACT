@@ -5,7 +5,7 @@ import Label from './Label';
 import '../assets/stylesheets/editForm.css';
 
 
-class EditForm extends Component {
+export class EditForm extends Component {
   constructor(props) {
     super(props);
 

@@ -7,7 +7,7 @@
     "cleanSrc": "rimraf dist/src",
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
-    "test": "jest --coverage",
+    "test": "jest --coverage -u",
     "update-snapshot": "jest --coverage -u",
     "coveralls": "npm run test && cat coverage/lcov.info | coveralls"
   },

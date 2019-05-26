@@ -22,7 +22,7 @@ describe('login actions', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('test handle login event', () => {
+  it('should handle login event', () => {
     const wrapper = shallow(<Login {...loginProps} />);
     const e = { preventDefault: jest.fn() };
     expect(wrapper.instance().login(e));

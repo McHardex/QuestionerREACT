@@ -48,13 +48,13 @@ describe('auth actions', () => {
       },
       {
         type: actionTypes.SIGNUP_ERROR,
-        error: 'firstname is required',
+        error: 'username is required',
       },
     ];
 
     const store = mockStore({});
 
-    const error = 'firstname is required';
+    const error = 'username is required';
     await store.dispatch(signUpUser(error));
     expect(store.getActions()).toEqual(expectedAction);
   });

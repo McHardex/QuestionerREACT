@@ -20,32 +20,32 @@ export const loginError = error => ({
   error,
 });
 
-export const signUpUser = (data, succesCallBack) => ((dispatch) => {
+export const signUpUser = data => async (dispatch) => {
   dispatch(contentLoading());
-  return (
-    http.post('/auth/signup', data)
-      .then((res) => {
-        dispatch(signUpSuccess(res));
-        succesCallBack();
-      })
-      .catch((err) => {
-        dispatch(signUpError(err.response.data.error));
-      })
-  );
-});
+  await http
+    .post('/auth/signup', data)
+    .then((res) => {
+      const { token } = res.data.data;
+      localStorage.setItem('token', JSON.stringify(token));
+      dispatch(signUpSuccess(res));
+      window.location = '/meetups';
+    })
+    .catch((err) => {
+      dispatch(signUpError(err.response.data.error));
+    });
+};
 
-export const loginUser = data => ((dispatch) => {
+export const loginUser = data => (dispatch) => {
   dispatch(contentLoading());
-  return (
-    http.post('/auth/login', data)
-      .then((res) => {
-        const { token, user } = res.data.data[0];
-        dispatch(loginSuccess(user));
-        localStorage.setItem('token', JSON.stringify(token));
-        window.location = './meetups';
-      })
-      .catch((err) => {
-        dispatch(loginError(err.response.data.error));
-      })
-  );
-});
+  return http
+    .post('/auth/login', data)
+    .then((res) => {
+      const { token, user } = res.data.data[0];
+      dispatch(loginSuccess(user));
+      localStorage.setItem('token', JSON.stringify(token));
+      window.location = '/meetups';
+    })
+    .catch((err) => {
+      dispatch(loginError(err.response.data.error));
+    });
+};

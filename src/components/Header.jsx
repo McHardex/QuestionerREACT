@@ -8,7 +8,7 @@ import '../assets/stylesheets/landingPage.css';
 import Logout from './Logout';
 
 
-class Header extends Component {
+export class Header extends Component {
   componentDidMount = () => {
     const { getCurrentUser } = this.props;
     getCurrentUser();

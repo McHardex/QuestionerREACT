@@ -23,6 +23,7 @@ class Tags extends Component {
   }
 
   handleDrag = (tag, currPos, newPos) => {
+    // eslint-disable-next-line react/destructuring-assignment
     const tags = [...this.state.tags];
     const newTags = tags.slice();
 

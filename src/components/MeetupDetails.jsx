@@ -7,10 +7,13 @@ import { clearError } from '../actions/action.helpers';
 import DisplayMessage from './DisplayMessage';
 import {
   getSingleMeetup,
-  getRsvp, postRsvp,
+  getRsvp,
+  postRsvp,
+  getRsvpByUser,
   postQuestions,
   upvoteAndDownvoteQuestion,
   postComments,
+  resetComponent,
 } from '../actions/meetupDetailsActions';
 import '../assets/stylesheets/meetupDetails.css';
 import Loader from './Loader';
@@ -24,28 +27,34 @@ export class MeetupDetails extends Component {
     };
   }
 
-  updateRsvp = (target) => {
-    target.reset();
-    const { id } = this.state;
-    const { getRsvp } = this.props;
+  componentDidMount() {
+    const {
+      match, getSingleMeetup, getRsvp, getRsvpByUser,
+    } = this.props;
+
+    const { id } = match.params;
+
     getRsvp(id);
+    getSingleMeetup(id);
+    getRsvpByUser(id);
+    this.setState({ id });
+  }
+
+  componentWillUnmount() {
+    const { resetComponent } = this.props;
+    resetComponent();
   }
 
   // post rsvp response
   postRsvp = (e) => {
     e.preventDefault();
-    const data = {};
     const { target } = e;
-    const formData = new FormData(target);
-
-    for (const entry of formData.entries()) {
-      const [keys, values] = entry;
-      data[keys] = values;
-    }
+    const data = {
+      response: target.value,
+    };
     const { id } = this.state;
-
-    const { postRsvp } = this.props;
-    postRsvp(id, data, () => this.updateRsvp(target));
+    const { postRsvp, getRsvp } = this.props;
+    postRsvp(id, data, () => getRsvp(id));
   }
 
   // post questions
@@ -91,46 +100,28 @@ export class MeetupDetails extends Component {
     });
   }
 
-  componentDidMount = () => {
-    const {
-      match, getSingleMeetup, getRsvp,
-    } = this.props;
-
-    const { id } = match.params;
-
-    getRsvp(id);
-    getSingleMeetup(id);
-    this.setState({ id });
-  }
-
-  componentWillUnmount = () => {
-    const { meetups } = this.props;
-    meetups.messageStatus = false;
-  }
-
   clearError = () => {
     const { clearError } = this.props;
     clearError();
   }
 
   render() {
-    const { meetups } = this.props;
+    const { meetups, loading } = this.props;
+    const { loader: isLoading } = loading;
     const { meetup } = meetups;
     const {
-      rsvpPostSuccess,
-      rsvpPostError,
       message,
-      isLoading,
       getRsvpMessage,
       postQuestionError,
+      rsvpPostSuccess,
+      userRsvp,
     } = meetups;
-
 
     const { id } = this.state;
 
     return (
       <div className="m-details-cont">
-        {isLoading && <Loader />}
+        { isLoading && <Loader />}
         <Header />
         <div className="m-cont">
           <div className="m-image" />
@@ -152,32 +143,46 @@ export class MeetupDetails extends Component {
             </div>
           </div>
         </div>
-        <form id="rsvp-submit" type="submit" onSubmit={this.postRsvp}>
-          <input
-            type="text"
-            className="rsvp-val"
-            name="response"
-            placeholder="Will you love to attend this meetup?"
-            autoComplete="off"
-            required
-          />
-          <DisplayMessage
-            error={rsvpPostSuccess}
-            message={message}
-            onClick={this.clearError}
-            successClass="success-disp-msg"
-          />
-          <DisplayMessage
-            error={rsvpPostError}
-            message={message}
-            onClick={this.clearError}
-          />
-          <DisplayMessage
-            error={postQuestionError}
-            message={message}
-            onClick={this.clearError}
-          />
-        </form>
+        <h2 className="rsvp-ques">Will you love to attend this meetup?</h2>
+        <div className="rsvp-resp-buttn">
+          <button
+            type="submit"
+            disabled={message === 'yes' || userRsvp === 'yes'}
+            className={message === 'yes' || userRsvp === 'yes' ? 'disable-yes-btn' : 'yes-btn'}
+            value="yes"
+            onClick={this.postRsvp}
+          >
+            Yes
+          </button>
+          <button
+            type="submit"
+            disabled={message === 'no' || userRsvp === 'no'}
+            className={message === 'no' || userRsvp === 'no' ? 'disable-no-btn' : 'no-btn'}
+            value="no"
+            onClick={this.postRsvp}
+          >
+            No
+          </button>
+          <button
+            type="submit"
+            disabled={message === 'maybe' || userRsvp === 'maybe'}
+            className={message === 'maybe' || userRsvp === 'maybe' ? 'disable-maybe-btn' : 'maybe-btn'}
+            value="maybe"
+            onClick={this.postRsvp}
+          >
+            Maybe
+          </button>
+        </div>
+        <DisplayMessage
+          error={postQuestionError}
+          message={message}
+          onClick={this.clearError}
+        />
+        <DisplayMessage
+          error={rsvpPostSuccess}
+          message="Your response has been recorded"
+          onClick={this.clearError}
+        />
         <form id="question-submit" onSubmit={this.postQuestion}>
           <input
             type="text"
@@ -190,6 +195,7 @@ export class MeetupDetails extends Component {
           <button type="submit" className="submit-ques">Send your question</button>
         </form>
         <hr />
+        <h1 className="disc">Discussions</h1>
         <QuestionsAndComments
           data={meetups.meetup}
           meetupID={id}
@@ -210,16 +216,19 @@ MeetupDetails.propTypes = {
     upvoteDownvoteSuccess: propTypes.number,
   }).isRequired,
   postRsvp: propTypes.func.isRequired,
+  resetComponent: propTypes.func.isRequired,
   getRsvp: propTypes.func.isRequired,
+  getRsvpByUser: propTypes.func.isRequired,
   getSingleMeetup: propTypes.func.isRequired,
   postQuestions: propTypes.func.isRequired,
   upvoteAndDownvoteQuestion: propTypes.func.isRequired,
   postComments: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
   match: propTypes.shape(propTypes.objectOf).isRequired,
+  loading: propTypes.shape().isRequired,
 };
 
-const mapStateToProps = meetups => meetups;
+const mapStateToProps = ({ meetups, loading }) => ({ meetups, loading });
 
 export default connect(mapStateToProps, {
   getSingleMeetup,
@@ -229,4 +238,6 @@ export default connect(mapStateToProps, {
   upvoteAndDownvoteQuestion,
   postComments,
   clearError,
+  getRsvpByUser,
+  resetComponent,
 })(MeetupDetails);

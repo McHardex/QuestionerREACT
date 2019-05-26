@@ -5,6 +5,9 @@ const actionType = {
   // clear error
   CLEAR_ERROR: 'CLEAR_ERROR',
 
+  // reset component when unmounted
+  RESET_COMPONENT: 'RESET_COMPONENT',
+
   // auth action types
   SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
   SIGNUP_ERROR: 'SIGNUP_ERROR',
@@ -14,6 +17,10 @@ const actionType = {
   // fetch user action types
   FETCH_USER_SUCCESS: 'FETCH_USER_SUCCESS',
   FETCH_USER_ERROR: 'FETCH_USER_ERROR',
+
+  // update user
+  UPDATE_USER_PROFILE_SUCESS: 'UPDATE_USER_PROFILE_SUCESS',
+  UPDATE_USER_PROFILE_ERROR: 'UPDATE_USER_PROFILE_ERROR',
 
   // fetch all meetups action types
   FETCH_MEETUPS_SUCCESS: 'FETCH_MEETUPS_SUCCESS',
@@ -25,6 +32,10 @@ const actionType = {
 
   // rsvp action types
   RSVP_GET_SUCCESS: 'RSVP_GET_SUCCESS',
+
+  // get rsvp by a particular user
+  USER_RSVP_SUCCESS: 'USER_RSVP_SUCCESS',
+  USER_RSVP_ERROR: 'USER_RSVP_ERROR',
 
   // rsvp post action type
   RSVP_POST_SUCCESS: 'RSVP_POST_SUCCESS',
