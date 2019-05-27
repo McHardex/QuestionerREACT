@@ -1,8 +1,8 @@
 const initialState = {
-  loader: true,
+  isLoading: false,
 };
 
-const loading = (state = initialState, action) => {
+const loader = (state = initialState, action) => {
   const { type } = action;
   const matches = /(.*)_(LOADING|SUCCESS|ERROR)/.exec(type);
 
@@ -11,9 +11,9 @@ const loading = (state = initialState, action) => {
   const [, requestName, requestState] = matches;
   return {
     ...state,
-    loader: requestState === 'LOADING',
+    isLoading: requestState === 'LOADING',
     [requestName]: requestState,
   };
 };
 
-export default loading;
+export default loader;

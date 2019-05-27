@@ -106,8 +106,8 @@ export class MeetupDetails extends Component {
   }
 
   render() {
-    const { meetups, loading } = this.props;
-    const { loader: isLoading } = loading;
+    const { meetups, loader } = this.props;
+    const { isLoading } = loader;
     const { meetup } = meetups;
     const {
       message,
@@ -225,10 +225,10 @@ MeetupDetails.propTypes = {
   postComments: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
   match: propTypes.shape(propTypes.objectOf).isRequired,
-  loading: propTypes.shape().isRequired,
+  loader: propTypes.shape().isRequired,
 };
 
-const mapStateToProps = ({ meetups, loading }) => ({ meetups, loading });
+const mapStateToProps = ({ meetups, loader }) => ({ meetups, loader });
 
 export default connect(mapStateToProps, {
   getSingleMeetup,

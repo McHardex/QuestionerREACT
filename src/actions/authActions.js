@@ -28,7 +28,7 @@ export const signUpUser = data => async (dispatch) => {
       const { token } = res.data.data;
       localStorage.setItem('token', JSON.stringify(token));
       dispatch(signUpSuccess(res));
-      window.location = '/meetups';
+      // window.location = '/meetups';
     })
     .catch((err) => {
       dispatch(signUpError(err.response.data.error));

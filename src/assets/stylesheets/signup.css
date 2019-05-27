@@ -1,5 +1,5 @@
 .signup-cont {
-  background: #292929;
+  background: #fff;
   height: -webkit-fill-available;
 }
 
@@ -35,13 +35,14 @@ header.signup {
 
 .wrapper h1 {
   font-size: 30px;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
+  color: #000000;
 }
 
 .have-acc p {
-  font-size: 14px;
-  color: #fff;
+  font-size: 18px;
+  color: #000;
 }
 
 .have-acc {
@@ -81,24 +82,29 @@ form.signup-form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  line-height: 2;
+  line-height: 3;
 }
 
 .form-input-signup {
   box-shadow: none;
-  border: none;
-  color: #f2f2f2;
-  background: #363636;
+  border: 1px solid #313030;
+  color: #020000;
+  background: transparent;
   font-weight: 100;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 24px;
   padding: 8px 16px;
   outline: none;
+  border-radius: 5px;
+}
+
+.form-input-signup:focus {
+  box-shadow: 0 0 3px #0007db;
 }
 
 label {
   font-size: 14px;
-  color: #ccc;
+  color: #000;
   font-weight: 500;
 }
 
@@ -113,6 +119,7 @@ label {
   color: #f2f2f2;
   font-size: 15px;
   outline: none;
+  cursor: pointer;
 }
 
 .submit-signup-form:hover {
@@ -126,7 +133,7 @@ label {
   left: 0;
   color: #fff;
   z-index: 99999;
-  background: #00631e;
+  background: #b70b06;
   margin: 0;
   text-align: center;
   font-weight: 600;

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
@@ -61,23 +60,23 @@ export class Profile extends Component {
       this.toggleModal();
       getCurrentUser();
     });
-  }
+  };
 
   render() {
-    const { meetups, profile, loading } = this.props;
-    const { loader: isLoading } = loading;
+    const { meetups, profile, loader } = this.props;
+    const { isLoading } = loader;
     const { user } = meetups;
     const { upcomingMeetups } = profile;
     const {
-      firstname, email, lastname, username, othername,
-    } = user;
+ firstname, email, lastname, username, othername 
+} = user;
 
     const { showModal } = this.state;
 
     return (
       <div className="admin-cont">
         <Header />
-        { isLoading && <Loader /> }
+        {isLoading && <Loader />}
         <div className="profile-wrapper">
           {showModal ? (
             <EditProfileModal
@@ -194,10 +193,14 @@ Profile.propTypes = {
     username: propTypes.string,
   }).isRequired,
   profile: propTypes.shape({}).isRequired,
-  loading: propTypes.shape({}).isRequired,
+  loader: propTypes.shape({}).isRequired,
 };
 
-const mapStateToProps = ({ meetups, profile, loading }) => ({ meetups, profile, loading });
+const mapStateToProps = ({ meetups, profile, loader }) => ({
+  meetups,
+  profile,
+  loader,
+});
 export default connect(
   mapStateToProps,
   {

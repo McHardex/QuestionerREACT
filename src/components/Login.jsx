@@ -31,14 +31,14 @@ export class Login extends Component {
   }
 
   render() {
-    const { auth, loading } = this.props;
-    const { loader } = loading;
+    const { auth, loader } = this.props;
+    const { isLoading } = loader;
     const {
       loginError, errorMessage,
     } = auth;
     return (
       <div className="login-cont">
-        {loader && <Loader />}
+        {isLoading && <Loader />}
         <div className="col1">
           <div className="col1-cont">
             <div className="logo-icon">
@@ -85,13 +85,13 @@ export class Login extends Component {
 Login.propTypes = {
   auth: propTypes.shape({
   }).isRequired,
-  loading: propTypes.shape({
-    loader: propTypes.bool,
+  loader: propTypes.shape({
+    isLoading: propTypes.bool,
   }).isRequired,
   loginUser: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ auth, loading }) => ({ auth, loading });
+const mapStateToProps = ({ auth, loader }) => ({ auth, loader });
 
 export default connect(mapStateToProps, { loginUser, clearError })(Login);

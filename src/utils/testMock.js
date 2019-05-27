@@ -3,14 +3,14 @@ const mock = {
   signupProps: {
     signUpUser: jest.fn(),
     clearError: jest.fn(),
-    loading: { loader: true },
+    loader: { isLoading: true },
     auth: {},
   },
   loginProps: {
     login: jest.fn(),
     loginUser: jest.fn(),
     clearError: jest.fn(),
-    loading: { loader: true },
+    loader: { isLoading: true },
     auth: {},
   },
   meetupProps: {
@@ -20,7 +20,7 @@ const mock = {
         { location: 'today', topic: 'when again', tags: ['name', 'any'] }],
     },
     getAllMeetups: jest.fn(),
-    loading: { loader: true },
+    loader: { isLoading: true },
     value: 'bukunmi',
   },
   signupPayload: {
@@ -46,7 +46,7 @@ const mock = {
     getRsvpByUser: jest.fn(),
     postRsvp: jest.fn(),
     upvoteAndDownvoteQuestion: jest.fn(),
-    loading: { loader: true },
+    loader: { isLoading: true },
     postComments: jest.fn(),
     clearError: jest.fn(),
     match: { params: { id: 1 } },
@@ -57,7 +57,7 @@ const mock = {
     getQuestionsCount: jest.fn(),
     getCommentsCount: jest.fn(),
     getUpcomingMeetups: jest.fn(),
-    loading: { loader: true },
+    loader: { isLoading: true },
     meetups: {
       user: {
         firstname: 'adenisi',
@@ -74,6 +74,7 @@ const mock = {
     createMeetup: jest.fn(),
     deleteMeetup: jest.fn(),
     clearError: jest.fn(),
+    loader: { isLoading: true },
     meetups: {
       meetups: [
         { location: 'title', topic: 'not again', tags: ['name', 'any'] },

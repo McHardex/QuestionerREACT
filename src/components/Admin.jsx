@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import '../assets/stylesheets/admin.css';
 import { connect } from 'react-redux';
@@ -15,6 +16,8 @@ import {
 import DisplayMessage from './DisplayMessage';
 import Loader from './Loader';
 import EditForm from './EditForm';
+import DeleteModal from './DeleteModal';
+
 
 export class Admin extends Component {
   constructor(props) {
@@ -89,7 +92,7 @@ export class Admin extends Component {
     createMeetup(data, () => {
       getAllMeetups();
       target.reset();
-      this.setState({ tags: [] });
+      this.setState({ tags: [], showCreateMeetupModal: false });
     });
   }
 
@@ -113,11 +116,7 @@ export class Admin extends Component {
     this.setState({ editable: false });
   }
 
-  openCreateMeetupModal = async () => {
-    // e.preventDefault();
-    // const { getSingleMeetup } = this.props;
-    // const { id } = e.target;
-    // await getSingleMeetup(id);
+  openCreateMeetupModal = () => {
     this.setState({ showCreateMeetupModal: true });
   }
 
@@ -127,7 +126,7 @@ export class Admin extends Component {
 
   deleteMeetup = () => {
     const { deleteId } = this.state;
-    const { deleteMeetup } = this.props;
+    const { deleteMeetup, getAllMeetups } = this.props;
     deleteMeetup(deleteId, () => {
       getAllMeetups();
       this.setState({ showDeleteModal: false });
@@ -159,10 +158,11 @@ export class Admin extends Component {
   }
 
   render() {
-    const { meetups, admin } = this.props;
+    const { meetups, admin, loader } = this.props;
+    const { isLoading } = loader;
     const { meetup: singleMeetup } = meetups;
     const {
-      message, postMeetupError, isLoading, deleteMeetupSuccess,
+      message, postMeetupError,
     } = admin;
     const {
       meetup, length, searchValue, tags, editable, showDeleteModal, showCreateMeetupModal,
@@ -171,14 +171,16 @@ export class Admin extends Component {
 
     return (
       <div className="admin-cont">
+        {isLoading && <Loader />}
+        {showDeleteModal
+          && (
+            <DeleteModal
+              confirmDelete={this.deleteMeetup}
+              closeModal={this.showDeleteModal}
+            />
+          )}
         <DisplayMessage
           error={postMeetupError}
-          message={message}
-          onClick={this.clearError}
-        />
-        <DisplayMessage
-          successClass="success-disp-msg"
-          error={deleteMeetupSuccess}
           message={message}
           onClick={this.clearError}
         />
@@ -195,27 +197,29 @@ export class Admin extends Component {
           </div>
           {showCreateMeetupModal && (
             <div className="cte-meetup-cont">
-              <form className="create-meetup" id="create-meetup" onSubmit={this.postMeetup}>
-                <Label className="label-cte-meetup" htmlFor="topic">Topic</Label>
-                <input className="form-input-cte-meetup" name="topic" type="text" required />
-                <Label className="label-cte-meetup" htmlFor="date">Date</Label>
-                <input className="form-input-cte-meetup empty" name="happeningOn" type="date" required />
-                <Label className="label-cte-meetup" htmlFor="location">Location</Label>
-                <input className="form-input-cte-meetup" name="location" type="text" required />
-                <Label className="label-cte-meetup" htmlFor="tags">Tags</Label>
-                <div className="tags-cont-show">
-                  <ReactTags
-                    tags={tags}
-                    labelField="text"
-                    handleDelete={this.handleTagDelete}
-                    handleAddition={this.handleAddition}
-                    handleDrag={this.handleDrag}
-                    maxLength={12}
-                  />
-                </div>
-                <button type="submit" className="submit-form">Create Meetup</button>
-                <button type="button" className="closeCreateMeetup" onClick={this.closeCreateMeetupModal}>X</button>
-              </form>
+              <div className="create-form-cont">
+                <form className="create-meetup" id="create-meetup" onSubmit={this.postMeetup}>
+                  <Label className="label-cte-meetup" htmlFor="topic">Topic</Label>
+                  <input className="form-input-cte-meetup" name="topic" type="text" required />
+                  <Label className="label-cte-meetup" htmlFor="date">Date</Label>
+                  <input className="form-input-cte-meetup empty" name="happeningOn" type="date" required />
+                  <Label className="label-cte-meetup" htmlFor="location">Location</Label>
+                  <input className="form-input-cte-meetup" name="location" type="text" required />
+                  <Label className="label-cte-meetup" htmlFor="tags">Tags</Label>
+                  <div className="tags-cont-show">
+                    <ReactTags
+                      tags={tags}
+                      labelField="text"
+                      handleDelete={this.handleTagDelete}
+                      handleAddition={this.handleAddition}
+                      handleDrag={this.handleDrag}
+                      maxLength={12}
+                    />
+                  </div>
+                  <button type="submit" className="submit-form">Create Meetup</button>
+                  <button type="button" className="closeCreateMeetup" onClick={this.closeCreateMeetupModal}>X</button>
+                </form>
+              </div>
             </div>
           )}
           <div className="search-cont">
@@ -287,7 +291,6 @@ export class Admin extends Component {
             </div>
           )
         }
-        {isLoading && <Loader />}
         {editable && (
           <EditForm
             closeEditModal={this.closeEditModal}
@@ -317,9 +320,10 @@ Admin.propTypes = {
   clearError: propTypes.func.isRequired,
   meetups: propTypes.objectOf(propTypes.shape).isRequired,
   admin: propTypes.objectOf(propTypes.shape).isRequired,
+  loader: propTypes.objectOf(propTypes.shape).isRequired,
 };
 
-const mapStateToProps = ({ admin, meetups }) => ({ admin, meetups });
+const mapStateToProps = ({ admin, meetups, loader }) => ({ admin, meetups, loader });
 
 export default connect(mapStateToProps, {
   getAllMeetups,

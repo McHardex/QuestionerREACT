@@ -47,13 +47,13 @@ export class Meetup extends Component {
 
 
   render() {
-    const { loading } = this.props;
-    const { loader } = loading;
+    const { loader } = this.props;
+    const { isLoading } = loader;
     const { meetup, length, searchValue } = this.state;
 
     return (
       <div className="admin-cont">
-        {loader && <Loader />}
+        {isLoading && <Loader />}
         <Header />
         <div className="cont">
           <div className="create-meetup-bk">
@@ -126,12 +126,12 @@ Meetup.propTypes = {
   meetups: propTypes.shape({
     meetups: propTypes.arrayOf(propTypes.shape),
   }).isRequired,
-  loading: propTypes.shape({
-    loader: propTypes.bool,
+  loader: propTypes.shape({
+    isLoading: propTypes.bool,
   }).isRequired,
   getAllMeetups: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ meetups, loading }) => ({ meetups, loading });
+const mapStateToProps = ({ meetups, loader }) => ({ meetups, loader });
 
 export default connect(mapStateToProps, { getAllMeetups })(Meetup);

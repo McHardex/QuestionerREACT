@@ -168,7 +168,7 @@ button.close-edit-profile:hover {
 .have-acc hr {
   border: none;
   height: 1px;
-  background: #ccc;
+  background: #000;
 }
 
 #upcoming-meetups {

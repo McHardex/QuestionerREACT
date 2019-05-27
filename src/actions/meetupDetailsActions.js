@@ -166,5 +166,5 @@ export const postComments = (data, successCallback) => (dispatch) => {
 };
 
 export const resetComponent = () => ({
-  type: actionTypes.RESET_COMPONENT,
+  type: actionTypes.RESET_COMPONENT_SUCCESS,
 });
