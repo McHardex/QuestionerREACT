@@ -2,7 +2,7 @@ body {
   margin: 0;
   height: 100vh;
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 header {
@@ -21,56 +21,49 @@ header {
 }
 
 .user {
-  margin-right: 20px;
-  color: #ccc;
-  font-weight: 600;
-  position: relative;
-  display: inline-block;
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  right: -19px;
-  left: -37px;
-  background-color: #000;
-  z-index: 1;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+  justify-content: space-around;
+  cursor: pointer;
 }
 
 .dropdown-content a {
   color: #ccc;
-  padding: 12px 16px;
+  margin-left: 16px;
   text-decoration: none;
-  display: block;
-  font-weight: 300;
-}
-
-.user:hover {
-  color: #fff;
-  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .dropdown-content a:hover {
-  background-color: #222;
-  color: #ea722a;
+  color: #fff;
 }
 
-.logout {
-  color: #ccc;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  font-weight: 300;
-  margin: 0;
+i.fas.fa-user-cog,
+#user {
+  display: none;
 }
 
-.logout:hover {
-  background-color: #222;
-  color: #ea722a;
+i.fas.fa-sign-out-alt {
+  font-size: 24px;
+  color: #555;
+  margin-left: 10px;
 }
 
-.user:hover .dropdown-content {display: block;}
+i.fas.fa-sign-out-alt:hover {
+  font-size: 24px;
+  color: #fff;
+  transition: 0.5s;
+}
 
 i.fas.fa-user-cog {
   font-size: 30px;
@@ -134,7 +127,7 @@ form.search-bar {
   background-color: transparent;
   box-sizing: border-box;
   appearance: none;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   background-image: url(https://res.cloudinary.com/mchardex/image/upload/v1558174711/search.png);
   transition: 0.2s ease-in-out;
 }
@@ -177,7 +170,7 @@ label {
   border-radius: 2px;
   font-size: 18px;
   outline: none;
-  background:#f05a28a6;
+  background: #f05a28a6;
   color: #fff;
   font-size: 14px;
   border: 1px solid #f9681600;
@@ -198,7 +191,7 @@ label {
   padding: 10px 0;
   border-radius: 2px;
   font-size: 18px;
-  background: linear-gradient(to right,#f05a28 0,#e80a89 100%);
+  background: linear-gradient(to right, #f05a28 0, #e80a89 100%);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -227,7 +220,8 @@ input.form-input.tags {
   box-shadow: 0 0 3px #555;
 }
 
-i.fas.fa-trash, i.far.fa-edit {
+i.fas.fa-trash,
+i.far.fa-edit {
   color: #ccc;
   font-size: 30px;
   cursor: pointer;
@@ -241,14 +235,15 @@ i.fas.fa-trash {
   padding: 5px;
 }
 
-i.far.fa-edit{
+i.far.fa-edit {
   position: absolute;
   top: 0;
   right: 0;
   padding: 5px;
 }
 
-i.far.fa-edit:hover, i.fas.fa-trash:hover{
+i.far.fa-edit:hover,
+i.fas.fa-trash:hover {
   color: #fff;
   opacity: 1;
 }
@@ -268,7 +263,7 @@ i.far.fa-edit:hover, i.fas.fa-trash:hover{
 }
 
 .close-div {
-  color: #F44336;
+  color: #f44336;
   font-size: 40px;
   font-weight: 800;
   background: transparent;
@@ -299,7 +294,9 @@ i.far.fa-edit:hover, i.fas.fa-trash:hover{
   opacity: 0.8;
 }
 
-#tag1, #tag2, #tag3 {
+#tag1,
+#tag2,
+#tag3 {
   font-weight: 900;
 }
 
@@ -353,6 +350,12 @@ button.ui.primary.button:hover {
 
   .user span {
     display: none;
+    font-size: 12px;
+  }
+
+  i.fas.fa-user-cog,
+  #user {
+    display: block;
   }
 
   .tags-cont {
@@ -362,9 +365,47 @@ button.ui.primary.button:hover {
   .ReactTags__tags.react-tags-wrapper {
     width: 100%;
   }
-  
+
   .ReactTags__selected {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .user {
+    color: #ccc;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  i.fas.fa-user-cog {
+    display: block;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    right: -19px;
+    left: -8px;
+    background-color: #000;
+    z-index: 1;
+    text-align: center;
+    top: 45px;
+    padding: 3px;
+    display: none;
+    width: 100%;
+  }
+
+  .dropdown-content a {
+    color: #ccc;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .user:hover .dropdown-content {
+    display: block;
   }
 }
 
