@@ -41,7 +41,7 @@ export class Header extends Component {
                 <span id="user">{username}</span>
                 <div className="dropdown-content">
                   <Link to="/profile">Profile </Link>
-                  <Link to="/meetups">Meetup </Link>
+                  <Link to="/meetups">Meetups </Link>
                   <Link to="/admin" id="admin">Admin</Link>
                   <Logout />
                 </div>
@@ -59,7 +59,7 @@ export class Header extends Component {
                   <span id="user">{username}</span>
                   <div className="dropdown-content">
                     <Link to="/profile">Profile </Link>
-                    <Link to="/meetups">Meetup </Link>
+                    <Link to="/meetups">Meetups </Link>
                     <Logout />
                   </div>
                 </div>
