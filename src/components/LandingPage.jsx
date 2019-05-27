@@ -14,14 +14,14 @@ class LandingPage extends Component {
   }
 
   render() {
-    const { loading, meetups } = this.props;
+    const { loader, meetups } = this.props;
     const { meetups: meetup } = meetups;
-    const { loader: isLoading } = loading;
+    const { isLoading } = loader;
 
     return (
       <div className="landing-pg">
+        { isLoading && <Loader /> }
         <header>
-          { isLoading && <Loader /> }
           <div className="header-cont">
             <div className="nav1">
               <div className="questioner-logo">
@@ -125,12 +125,12 @@ LandingPage.propTypes = {
   meetups: propTypes.shape({
     meetups: propTypes.arrayOf(propTypes.shape),
   }).isRequired,
-  loading: propTypes.shape({
-    loader: propTypes.bool,
+  loader: propTypes.shape({
+    isLoading: propTypes.bool,
   }).isRequired,
   getAllMeetups: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ meetups, loading }) => ({ meetups, loading });
+const mapStateToProps = ({ meetups, loader }) => ({ meetups, loader });
 
 export default connect(mapStateToProps, { getAllMeetups })(LandingPage);
