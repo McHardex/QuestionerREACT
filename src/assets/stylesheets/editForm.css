@@ -44,7 +44,7 @@ button.submit-edit {
   border: none;
   outline: none;
   color: #ffffff;
-  background: #F44336;
+  background: #0b0f7b;
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
@@ -62,7 +62,7 @@ button.submit-edit:hover {
 }
 
 .close-edit-tab {
-  color: #F44336;
+  color: #929292;
   font-size: 40px;
   font-weight: 800;
   background: transparent;
@@ -74,8 +74,9 @@ button.submit-edit:hover {
   cursor: pointer;
 }
 
-span.tag-wrapper.ReactTags__tag {
-  padding: 12px;
+.close-edit-tab:hover {
+  color: #ab0001;
+  transition: 0.5s;
 }
 
 .ReactTags__tags.react-tags-wrapper {

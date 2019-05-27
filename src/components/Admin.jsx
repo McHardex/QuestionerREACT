@@ -27,6 +27,7 @@ export class Admin extends Component {
       tags: [],
       editable: false,
       showDeleteModal: false,
+      showCreateMeetupModal: false,
       deleteId: null,
     };
   }
@@ -102,14 +103,26 @@ export class Admin extends Component {
 
   openEditModal = async (e) => {
     e.preventDefault();
+    this.setState({ editable: true });
     const { getSingleMeetup } = this.props;
     const { id } = e.target;
     await getSingleMeetup(id);
-    this.setState({ editable: true });
   }
 
   closeEditModal = () => {
     this.setState({ editable: false });
+  }
+
+  openCreateMeetupModal = async () => {
+    // e.preventDefault();
+    // const { getSingleMeetup } = this.props;
+    // const { id } = e.target;
+    // await getSingleMeetup(id);
+    this.setState({ showCreateMeetupModal: true });
+  }
+
+  closeCreateMeetupModal = () => {
+    this.setState({ showCreateMeetupModal: false });
   }
 
   deleteMeetup = () => {
@@ -152,7 +165,7 @@ export class Admin extends Component {
       message, postMeetupError, isLoading, deleteMeetupSuccess,
     } = admin;
     const {
-      meetup, length, searchValue, tags, editable, showDeleteModal,
+      meetup, length, searchValue, tags, editable, showDeleteModal, showCreateMeetupModal,
     } = this.state;
 
 
@@ -170,6 +183,9 @@ export class Admin extends Component {
           onClick={this.clearError}
         />
         <Header />
+        <button type="button" className="create-meetup-icon" onClick={this.openCreateMeetupModal}>
+          <i className="fas fa-plus" />
+        </button>
         <div className="cont">
           <div className="create-meetup-bk">
             <div className="banner-text">
@@ -177,29 +193,31 @@ export class Admin extends Component {
               <p>Enrich lives through open mindset and constructive discussions</p>
             </div>
           </div>
-          <div className="cte-meetup-cont">
-            <form className="create-meetup" id="create-meetup" onSubmit={this.postMeetup}>
-              <Label htmlFor="topic">Topic</Label>
-              <input className="form-input" name="topic" type="text" required />
-              <Label htmlFor="date">Date</Label>
-              <input className="form-input empty" name="happeningOn" type="date" required />
-              <Label htmlFor="location">Location</Label>
-              <input className="form-input" name="location" type="text" required />
-              <Label htmlFor="tags">Tags</Label>
-              <div className="tags-cont-show">
-                <ReactTags
-                  tags={tags}
-                  labelField="text"
-                  handleDelete={this.handleTagDelete}
-                  handleAddition={this.handleAddition}
-                  handleDrag={this.handleDrag}
-                  maxLength={12}
-                />
-              </div>
-              <button type="submit" className="submit-form">Create Meetup</button>
-            </form>
-          </div>
-          <hr />
+          {showCreateMeetupModal && (
+            <div className="cte-meetup-cont">
+              <form className="create-meetup" id="create-meetup" onSubmit={this.postMeetup}>
+                <Label className="label-cte-meetup" htmlFor="topic">Topic</Label>
+                <input className="form-input-cte-meetup" name="topic" type="text" required />
+                <Label className="label-cte-meetup" htmlFor="date">Date</Label>
+                <input className="form-input-cte-meetup empty" name="happeningOn" type="date" required />
+                <Label className="label-cte-meetup" htmlFor="location">Location</Label>
+                <input className="form-input-cte-meetup" name="location" type="text" required />
+                <Label className="label-cte-meetup" htmlFor="tags">Tags</Label>
+                <div className="tags-cont-show">
+                  <ReactTags
+                    tags={tags}
+                    labelField="text"
+                    handleDelete={this.handleTagDelete}
+                    handleAddition={this.handleAddition}
+                    handleDrag={this.handleDrag}
+                    maxLength={12}
+                  />
+                </div>
+                <button type="submit" className="submit-form">Create Meetup</button>
+                <button type="button" className="closeCreateMeetup" onClick={this.closeCreateMeetupModal}>X</button>
+              </form>
+            </div>
+          )}
           <div className="search-cont">
             <input
               type="text"
@@ -227,7 +245,7 @@ export class Admin extends Component {
             <div className="meetups" id="meetups">
               {
                 meetup && meetup.map(meetup => (
-                  <div className="meetup-wrap" key={meetup.id}>
+                  <div className="meetup-wrap-landing-page" key={meetup.id}>
                     <Link to={`/meetups/${meetup.id}`} className="link" key={meetup.id}>
                       <div
                         className="meetup-cont"
@@ -235,6 +253,9 @@ export class Admin extends Component {
                         key={meetup.id}
                       >
                         <div className="meetup-text">
+                          <div className="meet-img">
+                            <img src="https://res.cloudinary.com/mchardex/image/upload/v1558174712/logo.png" alt="questioner-logo" />
+                          </div>
                           <p className="date">{new Date(meetup.happeningon).toDateString()}</p>
                           <h3 id={meetup.id} className="meetup-topic">{meetup.topic}</h3>
                           <p className="loctn">{meetup.location}</p>
