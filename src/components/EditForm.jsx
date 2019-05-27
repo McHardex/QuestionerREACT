@@ -80,9 +80,9 @@ export class EditForm extends Component {
   render() {
     const { closeEditModal, singleMeetup } = this.props;
     const { tags } = this.state;
-    const newdate = new Date(singleMeetup[0] && singleMeetup[0].happeningon).toISOString().split('T')[0];
-    const convertDate = newdate.split('/').reverse().join('-');
-    const removeChar = newdate.split('/').reverse().join('-').slice(1);
+    // const newdate = new Date(singleMeetup[0] && singleMeetup[0].happeningon).toISOString().split('T')[0];
+    // const convertDate = newdate.split('/').reverse().join('-');
+    // const removeChar = newdate.split('/').reverse().join('-').slice(1);
 
     return (
       <div className="edit-form-cont">
@@ -100,7 +100,7 @@ export class EditForm extends Component {
             className="edit-input empty"
             name="happeningOn"
             type="date"
-            defaultValue={convertDate.includes('+') ? removeChar : convertDate}
+            // defaultValue={convertDate.includes('+') ? removeChar : convertDate}
             required
           />
           <Label htmlFor="location">Location</Label>
