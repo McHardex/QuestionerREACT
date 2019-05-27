@@ -139,7 +139,6 @@ form.search-bar {
 .create-meetup {
   display: flex;
   flex-direction: column;
-  width: 40%;
   margin: 0 auto;
   position: relative;
 }
@@ -167,7 +166,7 @@ form.search-bar {
 
 .create-meetup-icon {
   position: fixed;
-  bottom: 5%;
+  bottom: 0;
   right: 5%;
   color: #0b0f7b;
   padding: 20px;
@@ -181,7 +180,7 @@ form.search-bar {
   cursor: pointer;
   padding: 5px;
   z-index: 1111;
-  border: 1px solid #fff;
+  border: 1px solid #000;
 }
 
 .closeCreateMeetup {
@@ -232,7 +231,7 @@ input.form-input-cte-meetup {
 
 .label-cte-meetup {
   font-size: 14px;
-  color: #fff;
+  color: #000;
   font-weight: 500;
 }
 
@@ -377,7 +376,7 @@ i.fas.fa-trash:hover {
 input.ReactTags__tagInputField {
   font-size: 16px;
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   padding: 14px 10px;
   border-radius: 5px;
   outline: none;
@@ -393,7 +392,6 @@ span.tag-wrapper.ReactTags__tag {
   margin-right: 5px;
   text-align: center;
   background: #000;
-  padding: 12px 0;
   transition: 0.5s;
 }
 
@@ -405,7 +403,7 @@ span.tag-wrapper.ReactTags__tag {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-row-gap: 5px;
-  width: 50%;
+  width: 100%;
   align-items: center;
 }
 
@@ -417,9 +415,55 @@ button.ui.primary.button:hover {
   background: #ff0000a9;
 }
 
+button.btn.btn-lg.btn-danger, button.btn.btn-lg.btn-default {
+  background: #e60000;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.btn.btn-lg.btn-default {
+  border: 1px solid #777;
+  background: transparent;
+  color: #000;
+}
+
+button.btn.btn-lg.btn-default:hover {
+  background: #777;
+  color: #fff;
+}
+
+.sweet-alert h2, .text-muted.lead {
+  color: #000;
+}
+
+.create-form-cont {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 3px 11px #b1b1b1;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   #meetups {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .create-meetup {
+    width: 95%;
+  }
+
+  .create-meetup-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  i.fas.fa-plus {
+    font-size: 20px;
   }
 
   .banner-text h1 {

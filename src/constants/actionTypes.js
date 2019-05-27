@@ -6,7 +6,7 @@ const actionType = {
   CLEAR_ERROR: 'CLEAR_ERROR',
 
   // reset component when unmounted
-  RESET_COMPONENT: 'RESET_COMPONENT',
+  RESET_COMPONENT_SUCCESS: 'RESET_COMPONENT_SUCCESS',
 
   // auth action types
   SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',

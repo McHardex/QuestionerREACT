@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { signUpUser } from '../actions/authActions';
 import { clearError } from '../actions/action.helpers';
@@ -35,12 +35,12 @@ export class Signup extends Component {
   }
 
   render() {
-    const { auth, loading } = this.props;
-    const { loader } = loading;
+    const { auth, loader } = this.props;
+    const { isLoading } = loader;
     const { errorMessage, signupError } = auth;
     return (
       <div className="signup-cont">
-        {loader && <Loader />}
+        {isLoading && <Loader />}
         <header>
           <div className="header-cont">
             <div className="nav1">
@@ -127,12 +127,12 @@ export class Signup extends Component {
 Signup.propTypes = {
   auth: propTypes.shape({
   }).isRequired,
-  loading: propTypes.shape({
-    loader: propTypes.bool,
+  loader: propTypes.shape({
+    isLoading: propTypes.bool,
   }).isRequired,
   signUpUser: propTypes.func.isRequired,
   clearError: propTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ auth, loading }) => ({ auth, loading });
+const mapStateToProps = ({ auth, loader }) => ({ auth, loader });
 export default connect(mapStateToProps, { signUpUser, clearError })(Signup);

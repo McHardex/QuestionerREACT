@@ -83,6 +83,7 @@
   border: 1px solid #f7f5f4;
   font-weight: 700;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .sign-in:hover {
@@ -138,7 +139,7 @@ a.sign-up {
 
 .col2 {
   color: #fff;
-  background-image: url(https://cdn.wallpapersafari.com/79/18/TkhS4x.jpg);
+  background-image: url(https://atgbcentral.com/data/out/188/5648789-blue-background-images.jpg);
   min-height: 100vh;
   width: 50%;
   background-size: cover;

@@ -15,7 +15,7 @@
 
 form.edit-form {
   width: 40%;
-  background: #070404af;
+  background: #fff;
   padding: 30px;
   position: relative;
   border-radius: 5px;
@@ -28,7 +28,7 @@ form.edit-form {
   border-radius: 5px;
   border: 1px solid #4b4a4a6c;
   background: transparent;
-  color: #ffffff96;
+  color: #000;
   font-size: 16px;
   outline: none;
   box-sizing: border-box;
@@ -51,12 +51,11 @@ button.submit-edit {
   margin-top: 10px;
   font-weight: bolder;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 button.submit-edit:hover {
   color: #fff;
-  background: #F44336;
   transition: 0.5s;
   opacity: 1;
 }

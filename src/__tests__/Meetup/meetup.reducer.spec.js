@@ -172,10 +172,10 @@ describe('meetups reducers', () => {
     ).toEqual({});
   });
 
-  it('should handle.RESET_COMPONENT', () => {
+  it('should handle.RESET_COMPONENT_SUCCESS', () => {
     expect(
       meetups({}, {
-        type: actionTypes.RESET_COMPONENT,
+        type: actionTypes.RESET_COMPONENT_SUCCESS,
       }),
     ).toEqual({
       userRsvp: '',

@@ -88,7 +88,7 @@ const meetups = (state = initialState, action) => {
       return {
         ...state,
       };
-    case actionType.RESET_COMPONENT:
+    case actionType.RESET_COMPONENT_SUCCESS:
       return {
         ...state,
         userRsvp: '',
