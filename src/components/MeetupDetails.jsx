@@ -113,7 +113,6 @@ export class MeetupDetails extends Component {
       message,
       getRsvpMessage,
       postQuestionError,
-      rsvpPostSuccess,
       userRsvp,
     } = meetups;
 
@@ -176,11 +175,6 @@ export class MeetupDetails extends Component {
         <DisplayMessage
           error={postQuestionError}
           message={message}
-          onClick={this.clearError}
-        />
-        <DisplayMessage
-          error={rsvpPostSuccess}
-          message="Your response has been recorded"
           onClick={this.clearError}
         />
         <form id="question-submit" onSubmit={this.postQuestion}>
