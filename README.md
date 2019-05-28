@@ -10,7 +10,7 @@ Crowd-source questions for a meetup. Questioner helps the meetup organizer prior
 
 **Live APP** [ here ](https://questionermchardex.netlify.com/)
 
-**Pivotal Tracker** [ here ](https://www.pivotaltracker.com/n/projects/2232247)
+**Pivotal Tracker** [ here ](https://www.pivotaltracker.com/n/projects/2323066)
 
  ## Libraries used
  * REACTJS and REDUX
