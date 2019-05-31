@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/actionTypes';
 import { contentLoading } from './action.helpers';
 import http from '../utils/http';
@@ -87,9 +88,15 @@ export const updateProfile = (data, successCallBack) => ((dispatch) => {
     http.patch('/user', data)
       .then(() => {
         successCallBack();
+        toast.success('Profile update successful', {
+          closeButton: true,
+        });
         dispatch(updateUserSucess());
       })
       .catch((err) => {
+        toast.error(err.response.data.error, {
+          closeButton: true,
+        });
         dispatch(updateUserError(err.response));
       })
   );

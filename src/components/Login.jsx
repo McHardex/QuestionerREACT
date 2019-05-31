@@ -6,7 +6,6 @@ import { loginUser } from '../actions/authActions';
 import { clearError } from '../actions/action.helpers';
 import '../assets/stylesheets/login.css';
 import Loader from './Loader';
-import DisplayMessage from './DisplayMessage';
 
 
 export class Login extends Component {
@@ -72,11 +71,6 @@ export class Login extends Component {
           </h1>
           <Link to="/signup" className="getstarted">Get started today</Link>
         </div>
-        <DisplayMessage
-          error={loginError}
-          message={errorMessage}
-          onClick={this.clearError}
-        />
       </div>
     );
   }

@@ -48,14 +48,12 @@ describe('auth actions', () => {
       },
       {
         type: actionTypes.SIGNUP_ERROR,
-        error: 'username is required',
       },
     ];
 
     const store = mockStore({});
 
-    const error = 'username is required';
-    await store.dispatch(signUpUser(error));
+    await store.dispatch(signUpUser());
     expect(store.getActions()).toEqual(expectedAction);
   });
 
@@ -95,36 +93,6 @@ describe('auth actions', () => {
     expect(store.getActions()).toEqual(expectedAction);
   });
 
-  it('should create an action on login success', async () => {
-    fetchMock.mock(
-      '/api/v1/auth/login',
-      {
-        status: 200,
-      },
-      {
-        method: 'POST',
-      },
-    );
-
-    await fetch('/api/v1/auth/login', {
-      method: 'POST',
-    });
-
-    const expectedAction = [
-      {
-        type: 'CONTENT_LOADING',
-      },
-      {
-        type: actionTypes.LOGIN_SUCCESS,
-      },
-    ];
-
-    const store = mockStore({});
-
-    await store.dispatch(loginUser(login));
-    expect(store.getActions()).toEqual(expectedAction);
-  });
-
   it('should create an action on login error', async () => {
     fetchMock.mock(
       '/api/v1/auth/login',
@@ -146,13 +114,11 @@ describe('auth actions', () => {
       },
       {
         type: actionTypes.LOGIN_ERROR,
-        error: 'email is required',
       },
     ];
 
     const store = mockStore({});
-    const error = 'email is required';
-    await store.dispatch(loginUser(error));
+    await store.dispatch(loginUser());
     expect(store.getActions()).toEqual(expectedAction);
   });
 });

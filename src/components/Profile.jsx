@@ -32,13 +32,13 @@ export class Profile extends Component {
       getCommentsCount,
       getUpcomingMeetups,
     } = this.props;
-    const { meetups } = this.props;
-    const { user } = meetups;
-
     await getCurrentUser();
     await getUpcomingMeetups();
-    await getCommentsCount(user.id);
-    await getQuestionsCount(user.id);
+    const { meetups } = this.props;
+    const { user } = meetups;
+    getCommentsCount(user.id);
+    getQuestionsCount(user.id);
+    console.log(user, '-----');
   }
 
   toggleModal = () => {
@@ -65,11 +65,12 @@ export class Profile extends Component {
   render() {
     const { meetups, profile, loader } = this.props;
     const { isLoading } = loader;
+    console.log(isLoading);
     const { user } = meetups;
     const { upcomingMeetups } = profile;
     const {
- firstname, email, lastname, username, othername 
-} = user;
+      firstname, email, lastname, username, othername,
+    } = user;
 
     const { showModal } = this.state;
 

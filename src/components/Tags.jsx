@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
-import '../assets/stylesheets/tags.css';
 
 class Tags extends Component {
   constructor(props) {

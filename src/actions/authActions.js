@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/actionTypes';
 import http from '../utils/http';
 import { contentLoading } from './action.helpers';
@@ -15,9 +16,8 @@ export const loginSuccess = () => ({
   type: actionTypes.LOGIN_SUCCESS,
 });
 
-export const loginError = error => ({
+export const loginError = () => ({
   type: actionTypes.LOGIN_ERROR,
-  error,
 });
 
 export const signUpUser = data => async (dispatch) => {
@@ -28,10 +28,13 @@ export const signUpUser = data => async (dispatch) => {
       const { token } = res.data.data;
       localStorage.setItem('token', JSON.stringify(token));
       dispatch(signUpSuccess(res));
-      // window.location = '/meetups';
+      window.location = '/meetups';
     })
     .catch((err) => {
-      dispatch(signUpError(err.response.data.error));
+      toast.error(err.response.data.error, {
+        closeButton: true,
+      });
+      dispatch(signUpError());
     });
 };
 
@@ -46,6 +49,9 @@ export const loginUser = data => (dispatch) => {
       window.location = '/meetups';
     })
     .catch((err) => {
-      dispatch(loginError(err.response.data.error));
+      toast.error(err.response.data.error, {
+        closeButton: true,
+      });
+      dispatch(loginError());
     });
 };

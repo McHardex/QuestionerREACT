@@ -8,4 +8,3 @@ const http = axios.create({
 });
 
 export default http;
-// https://questioner-mchardex.herokuapp.com/api/v1;

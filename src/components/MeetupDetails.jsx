@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import Header from './Header';
 import QuestionsAndComments from './QuestionsAndComments';
 import { clearError } from '../actions/action.helpers';
-import DisplayMessage from './DisplayMessage';
 import {
   getSingleMeetup,
   getRsvp,
@@ -172,11 +171,6 @@ export class MeetupDetails extends Component {
             Maybe
           </button>
         </div>
-        <DisplayMessage
-          error={postQuestionError}
-          message={message}
-          onClick={this.clearError}
-        />
         <form id="question-submit" onSubmit={this.postQuestion}>
           <input
             type="text"

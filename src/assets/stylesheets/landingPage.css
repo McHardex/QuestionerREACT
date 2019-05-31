@@ -7,10 +7,10 @@ body {
 header {
   background-color: #1d1d1de3;
   box-shadow: 0 10px 20px 0 #00000033;
-  padding: 20px 0;
   position: fixed;
   top: 0;
   right: 0;
+  padding: 8px;
   left: 0;
   z-index: 9999;
   display: flex;
@@ -210,6 +210,45 @@ h2.schedule {
   -webkit-text-fill-color: transparent;
 }
 
+.Toastify__toast--error {
+  background: #b91c0c;
+  position: absolute;
+  top: 66px;
+  min-height: 50px;
+  border-radius: 3px 3px 0 0;
+}
+
+.Toastify__toast--success {
+  background: #0d8e10 !important;
+  position: absolute !important;
+  top: 66px !important;
+  min-height: 50px !important;
+  border-radius: 3px 3px 0 0 !important;
+}
+
+.Toastify__toast {
+  position: absolute;
+  min-height: 50px;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 8px;
+  top: 50px;
+  right: 0;
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-height: 800px;
+  overflow: hidden;
+  font-family: sans-serif;
+  cursor: pointer;
+  direction: ltr;
+  z-index: 1111;
+}
+
 /* how it works */
 .how-cont {
   background-color: #555;
@@ -255,6 +294,22 @@ i.fas.fa-search, i.fas.fa-plus {
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
+  .Toastify__toast--error {
+    background: #b91c0c;
+    position: absolute;
+    top: 66px;
+    min-height: 50px;
+    border-radius: 3px 3px 0 0;
+  }
+  
+  .Toastify__toast--success {
+    background: #0d8e10 !important;
+    position: absolute !important;
+    top: 66px !important;
+    min-height: 50px !important;
+    border-radius: 3px 3px 0 0 !important;
+  }
+
   .questioner-logo span, .get-started {
     display: none;
   }

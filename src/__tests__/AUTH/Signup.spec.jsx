@@ -5,7 +5,6 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Signup } from '../../components/Signup';
 import Loader from '../../components/Loader';
-import DisplayMessage from '../../components/DisplayMessage';
 import mock from '../../utils/testMock';
 
 const { signupProps } = mock;
@@ -36,16 +35,8 @@ describe('signup', () => {
     onClick: jest.fn(),
   };
 
-  it('should render DisplayMessage', () => {
-    shallow(<DisplayMessage {...props} />);
-  });
 
   it('should render DisplayMessage', () => {
     shallow(<Loader {...props} />);
-  });
-
-  it('test handle clearError event', () => {
-    const wrapper = shallow(<Signup {...signupProps} />);
-    expect(wrapper.instance().clearError());
-  });
+  }); 
 });

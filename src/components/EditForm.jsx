@@ -80,9 +80,6 @@ export class EditForm extends Component {
   render() {
     const { closeEditModal, singleMeetup } = this.props;
     const { tags } = this.state;
-    // const newdate = new Date(singleMeetup[0] && singleMeetup[0].happeningon).toISOString().split('T')[0];
-    // const convertDate = newdate.split('/').reverse().join('-');
-    // const removeChar = newdate.split('/').reverse().join('-').slice(1);
 
     return (
       <div className="edit-form-cont">
@@ -133,10 +130,14 @@ export class EditForm extends Component {
   }
 }
 
+EditForm.defaultProps = {
+  singleMeetup: [{}],
+};
+
 EditForm.propTypes = {
   closeEditModal: propTypes.func.isRequired,
   updateMeetup: propTypes.func.isRequired,
-  singleMeetup: propTypes.arrayOf(propTypes.shape).isRequired,
+  singleMeetup: propTypes.arrayOf(propTypes.shape),
 };
 
 export default EditForm;
