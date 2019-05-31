@@ -48,14 +48,12 @@ describe('auth actions', () => {
       },
       {
         type: actionTypes.SIGNUP_ERROR,
-        error: 'username is required',
       },
     ];
 
     const store = mockStore({});
 
-    const error = 'username is required';
-    await store.dispatch(signUpUser(error));
+    await store.dispatch(signUpUser());
     expect(store.getActions()).toEqual(expectedAction);
   });
 
@@ -146,13 +144,11 @@ describe('auth actions', () => {
       },
       {
         type: actionTypes.LOGIN_ERROR,
-        error: 'email is required',
       },
     ];
 
     const store = mockStore({});
-    const error = 'email is required';
-    await store.dispatch(loginUser(error));
+    await store.dispatch(loginUser());
     expect(store.getActions()).toEqual(expectedAction);
   });
 });

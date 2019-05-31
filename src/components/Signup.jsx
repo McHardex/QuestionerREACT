@@ -7,7 +7,6 @@ import { clearError } from '../actions/action.helpers';
 import '../assets/stylesheets/signup.css';
 import Label from './Label.jsx';
 import Loader from './Loader';
-import DisplayMessage from './DisplayMessage';
 
 export class Signup extends Component {
   resetForm = (target) => {
@@ -29,15 +28,9 @@ export class Signup extends Component {
     signUpUser(data, () => this.resetForm(target));
   }
 
-  clearError = () => {
-    const { clearError } = this.props;
-    clearError();
-  }
-
   render() {
-    const { auth, loader } = this.props;
+    const { loader } = this.props;
     const { isLoading } = loader;
-    const { errorMessage, signupError } = auth;
     return (
       <div className="signup-cont">
         {isLoading && <Loader />}
@@ -114,11 +107,6 @@ export class Signup extends Component {
             </button>
           </form>
         </div>
-        <DisplayMessage
-          error={signupError}
-          message={errorMessage}
-          onClick={this.clearError}
-        />
       </div>
     );
   }
@@ -131,7 +119,6 @@ Signup.propTypes = {
     isLoading: propTypes.bool,
   }).isRequired,
   signUpUser: propTypes.func.isRequired,
-  clearError: propTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ auth, loader }) => ({ auth, loader });

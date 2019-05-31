@@ -13,7 +13,6 @@ import { getSingleMeetup } from '../actions/meetupDetailsActions';
 import {
   createMeetup, clearError, updateMeetup, deleteMeetup,
 } from '../actions/adminActions';
-import DisplayMessage from './DisplayMessage';
 import Loader from './Loader';
 import EditForm from './EditForm';
 import DeleteModal from './DeleteModal';
@@ -179,11 +178,6 @@ export class Admin extends Component {
               closeModal={this.showDeleteModal}
             />
           )}
-        <DisplayMessage
-          error={postMeetupError}
-          message={message}
-          onClick={this.clearError}
-        />
         <Header />
         <button type="button" className="create-meetup-icon" onClick={this.openCreateMeetupModal}>
           <i className="fas fa-plus" />

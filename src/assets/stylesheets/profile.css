@@ -1,8 +1,8 @@
 .profile-wrapper {
   display: flex;
   flex-direction: row;
-  margin: 100px auto;
-  margin-bottom: 40px;
+  margin: 0 auto;
+  padding: 10% 0 0;
   width: 95%;
   justify-content: space-between;
   align-items: center;
@@ -224,13 +224,20 @@ a.cte-meetup {
   }
 
   td {
-    padding: 10px 0;
     font-size: 12px;
   }
 
   td:nth-child(even) {
     font-size: 12px;
     text-align: center;
+  }
+  .profile-wrapper {
+    flex-direction: column;
+    padding: 20% 0 0;
+  }
+  .profile-details, .activities {
+    width: 100%;
+    margin: 7px;
   }
 }
 

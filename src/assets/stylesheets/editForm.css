@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #1d0311e8;
+  background: #000008db;
 }
 
 form.edit-form {
@@ -51,7 +51,7 @@ button.submit-edit {
   margin-top: 10px;
   font-weight: bolder;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 button.submit-edit:hover {
@@ -76,10 +76,6 @@ button.submit-edit:hover {
 .close-edit-tab:hover {
   color: #ab0001;
   transition: 0.5s;
-}
-
-.ReactTags__tags.react-tags-wrapper {
-  width: 100%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

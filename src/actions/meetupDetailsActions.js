@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/actionTypes';
 import { contentLoading } from './action.helpers';
 import http from '../utils/http';
@@ -133,6 +134,9 @@ export const postQuestions = (data, successCallback) => (dispatch) => {
       successCallback();
     })
     .catch((err) => {
+      toast.error(err.response.data.error, {
+        closeButton: true,
+      });
       dispatch(postQuestionError(err.response.data.error));
     });
 };

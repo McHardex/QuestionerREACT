@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/actionTypes';
 import http from '../utils/http';
 import { contentLoading } from './action.helpers';
@@ -31,9 +32,11 @@ export const createMeetup = (data, succesCallBack) => ((dispatch) => {
     http.post('/meetups', data)
       .then((res) => {
         dispatch(createMeetupSuccess(res));
+        toast.success('Meetup created successfully');
         succesCallBack();
       })
       .catch((err) => {
+        toast.error(err.response.data.error);
         dispatch(createMeetupError(err.response.data.error));
       })
   );
