@@ -6,11 +6,6 @@
 
 Crowd-source questions for a meetup. Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions.
 
-* Admin login
-
-- Email: example@gmail.com
-- password: 12345678
-
 **Documentation** [ here ](https://github.com/McHardex/questioner)
 
 **Live APP** [ here ](https://questionermchardex.netlify.com/)
