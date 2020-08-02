@@ -37,6 +37,7 @@
         }],
         "import/extensions": [2, "never", "always", "ignorePackages"],
         "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
-        "no-shadow": [0]
+        "no-shadow": [0],
+        "linebreak-style": ["warn", "windows"]
     }
 }
